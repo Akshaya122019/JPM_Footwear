@@ -1,485 +1,1022 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>JPM Footwear – Home Carousel</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;0,800;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-<style>
-:root{
-  --gold:#FFD166;--teal:#1CB5A0;--orange:#FF8E53;
-  --img-w:480px;--img-h:480px;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Outfit',sans-serif;overflow-x:hidden}
-
-/* NAVBAR */
-.navbar{
-  background:rgba(11,29,58,.97);backdrop-filter:blur(18px);
-  padding:14px 0;position:fixed;width:100%;top:0;z-index:1000;
-  transition:padding .3s,box-shadow .3s;
-  border-bottom:2px solid transparent;
-  border-image:linear-gradient(90deg,#FF6B6B,#FFD166,#1CB5A0) 1;
-}
-.navbar.scrolled{padding:10px 0;box-shadow:0 4px 30px rgba(0,0,0,.4)}
-.navbar-brand{
-  font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:800;
-  background:linear-gradient(135deg,#FF6B6B,#FF8E53);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;letter-spacing:1px;line-height:1;
-}
-.nav-link{color:rgba(255,255,255,.75)!important;font-size:.88rem;font-weight:500;
-  letter-spacing:.5px;padding:6px 14px!important;border-radius:20px;transition:color .2s,background .2s}
-.nav-link:hover{color:#fff!important;background:rgba(255,255,255,.08)}
-.navbar-toggler{border:1px solid rgba(255,255,255,.3)}
-.navbar-toggler-icon{filter:invert(1)}
-
-/* CAROUSEL */
-#heroCarousel{margin-top:68px}
-/* Smooth slide transition */
-#heroCarousel .carousel-item{
-  transition:transform 0.75s cubic-bezier(.77,0,.18,1)!important;
-}
-
-.hero-slide{
-  min-height:calc(100vh - 68px);
-  display:flex;align-items:center;
-  position:relative;overflow:hidden;
-}
-
-.slide-split{position:absolute;inset:0;clip-path:polygon(58% 0,100% 0,100% 100%,42% 100%);opacity:.18;z-index:0;pointer-events:none}
-.orb{position:absolute;border-radius:50%;pointer-events:none;opacity:.12;animation:floatOrb 8s ease-in-out infinite;z-index:0}
-.orb-2{animation-delay:3s;animation-duration:11s}
-.orb-3{animation-delay:5.5s;animation-duration:9s}
-@keyframes floatOrb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-28px) scale(1.04)}}
-
-/* LEFT CONTENT */
-.hero-left{position:relative;z-index:3;padding-right:40px}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:.72rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;
-  margin-bottom:20px;opacity:0;
-}
-.hero-eyebrow .line{width:30px;height:2px;border-radius:2px;display:inline-block}
-.hero-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.8rem,5.2vw,5rem);font-weight:800;line-height:1.06;
-  color:#fff;margin-bottom:22px;text-shadow:0 4px 30px rgba(0,0,0,.25);opacity:0;
-}
-.hero-title em{font-style:italic}
-.hero-desc{font-size:1rem;color:rgba(255,255,255,.78);line-height:1.8;max-width:460px;margin-bottom:38px;opacity:0}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0}
-.btn-main{
-  padding:14px 36px;border-radius:50px;font-size:.9rem;font-weight:700;
-  letter-spacing:.5px;text-decoration:none;border:none;cursor:pointer;
-  display:inline-flex;align-items:center;gap:8px;
-  transition:transform .25s,box-shadow .25s;color:#fff;
-}
-.btn-main:hover{transform:translateY(-3px);color:#fff}
-.btn-ghost{
-  padding:12px 32px;border-radius:50px;font-size:.9rem;font-weight:600;
-  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
-  border:2px solid rgba(255,255,255,.5);color:#fff;background:rgba(255,255,255,.07);
-  backdrop-filter:blur(8px);transition:all .25s;
-}
-.btn-ghost:hover{background:rgba(255,255,255,.18);border-color:#fff;color:#fff}
-.hero-badges{display:flex;align-items:center;gap:18px;margin-top:36px;flex-wrap:wrap;opacity:0}
-.hbadge{display:flex;align-items:center;gap:7px;font-size:.78rem;color:rgba(255,255,255,.6);font-weight:500}
-.hbadge i{font-size:.85rem}
-.hbadge-sep{width:1px;height:18px;background:rgba(255,255,255,.2)}
-
-/* ENTER ANIMATIONS via .do-animate on .hero-slide */
-.do-animate .hero-eyebrow {animation:fadeUp .6s .15s ease both}
-.do-animate .hero-title   {animation:fadeUp .7s .30s ease both}
-.do-animate .hero-desc    {animation:fadeUp .7s .45s ease both}
-.do-animate .hero-btns    {animation:fadeUp .7s .58s ease both}
-.do-animate .hero-badges  {animation:fadeUp .7s .70s ease both}
-.do-animate .hero-img-wrap{animation:imgIn  .8s .35s ease both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes imgIn {from{opacity:0;transform:translateX(36px) scale(.95)}to{opacity:1;transform:translateX(0) scale(1)}}
-
-/* RIGHT IMAGE — uniform fixed box */
-.hero-right{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;padding-left:20px}
-.hero-img-wrap{position:relative;width:var(--img-w);height:var(--img-h);max-width:100%;flex-shrink:0;opacity:0}
-.hero-product-img{
-  width:100%;height:100%;object-fit:cover;object-position:center;
-  border-radius:24px;display:block;
-  filter:drop-shadow(0 24px 50px rgba(0,0,0,.5));
-  animation:imgFloat 5s ease-in-out infinite;
-}
-@keyframes imgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
-.img-glow{
-  position:absolute;width:80%;height:80%;border-radius:50%;top:10%;left:10%;
-  filter:blur(55px);opacity:.4;z-index:-1;animation:glowPulse 4s ease-in-out infinite;
-}
-@keyframes glowPulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.6;transform:scale(1.1)}}
-.float-card{
-  position:absolute;background:rgba(255,255,255,.12);backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:12px 18px;
-  color:#fff;font-size:.8rem;font-weight:600;white-space:nowrap;
-  box-shadow:0 8px 30px rgba(0,0,0,.2);z-index:4;
-}
-.fc-top  {top:-14px;right:-18px;animation:floatCard1 5s ease-in-out infinite}
-.fc-bottom{bottom:-14px;left:-22px;animation:floatCard2 6s ease-in-out infinite}
-@keyframes floatCard1{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes floatCard2{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
-.fc-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;margin-right:8px;font-size:.9rem}
-
-/* CONTROLS */
-.carousel-control-prev,.carousel-control-next{
-  width:52px;height:52px;background:rgba(255,255,255,.12);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,.2);border-radius:50%;
-  top:50%;transform:translateY(-50%);bottom:auto;transition:background .2s,transform .2s;
-}
-.carousel-control-prev{left:24px}
-.carousel-control-next{right:24px}
-.carousel-control-prev:hover,.carousel-control-next:hover{background:rgba(255,255,255,.25);transform:translateY(-50%) scale(1.08)}
-.carousel-control-prev-icon,.carousel-control-next-icon{width:18px;height:18px}
-
-/* PROGRESS DOTS */
-.hero-progress{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
-.hp-dot{position:relative;width:36px;height:4px;background:rgba(255,255,255,.25);border-radius:4px;overflow:hidden;cursor:pointer;transition:width .3s}
-.hp-dot.active{width:60px}
-.hp-dot::after{content:'';position:absolute;top:0;left:0;height:100%;width:0;background:#fff;border-radius:4px}
-.hp-dot.active::after{animation:progressFill 5s linear forwards}
-@keyframes progressFill{to{width:100%}}
-
-/* SCROLL HINT */
-.scroll-hint{position:absolute;bottom:34px;right:40px;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;z-index:10}
-.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.5),transparent);animation:scrollDrop 2s ease-in-out infinite}
-@keyframes scrollDrop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-
-/* RESPONSIVE */
-@media(max-width:1199px){:root{--img-w:400px;--img-h:400px}}
-@media(max-width:991px){
-  :root{--img-w:320px;--img-h:320px}
-  .hero-slide{min-height:auto;padding:60px 0 90px}
-  .hero-left{padding-right:0;text-align:center}
-  .hero-title{font-size:clamp(2.2rem,7vw,3rem)}
-  .hero-desc{max-width:100%;margin:0 auto 30px}
-  .hero-btns{justify-content:center}
-  .hero-badges{justify-content:center}
-  .hero-right{margin-top:40px;padding-left:0;justify-content:center}
-  .hero-img-wrap{margin:0 auto}
-  .scroll-hint{display:none}
-}
-@media(max-width:767px){
-  :root{--img-w:260px;--img-h:260px}
-  .hero-title{font-size:2rem}
-  .carousel-control-prev{left:10px}
-  .carousel-control-next{right:10px}
-  .fc-top,.fc-bottom{display:none}
-}
-@media(max-width:480px){
-  :root{--img-w:220px;--img-h:220px}
-  .hero-title{font-size:1.75rem}
-  .hero-btns{flex-direction:column;align-items:center}
-  .btn-main,.btn-ghost{width:100%;justify-content:center}
-}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JPM Footwear – Home Carousel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;0,800;1,700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet">
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg" id="mainNav">
-  <div class="container">
-    <a class="navbar-brand" href="#">JPM <em style="font-style:italic;">Footwear</em></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
-      <ul class="navbar-nav align-items-center gap-1">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Brands</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- CAROUSEL — NO data-bs-ride / data-bs-interval on the element; all via JS -->
-<section id="home">
-<div id="heroCarousel" class="carousel slide">
-
-  <div class="carousel-inner">
-
-    <!-- SLIDE 1 -->
-    <div class="carousel-item active">
-      <div class="hero-slide" style="background:linear-gradient(135deg,#0B1D3A 0%,#102a55 50%,#0d2040 100%);">
-        <div class="slide-split" style="background:#FF6B6B;"></div>
-        <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,#FF6B6B,transparent);top:-120px;right:5%;"></div>
-        <div class="orb orb-2" style="width:300px;height:300px;background:radial-gradient(circle,#FFD166,transparent);bottom:5%;right:35%;"></div>
-        <div class="orb orb-3" style="width:200px;height:200px;background:radial-gradient(circle,#FF8E53,transparent);top:30%;left:5%;"></div>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg" id="mainNav">
         <div class="container">
-          <div class="row align-items-center gy-4">
-            <div class="col-lg-6">
-              <div class="hero-left">
-                <div class="hero-eyebrow" style="color:var(--gold);">
-                  <span class="line" style="background:var(--gold);"></span>New Collection 2024<span class="line" style="background:var(--gold);"></span>
-                </div>
-                <h1 class="hero-title">Step Into<br/><em style="color:var(--gold);">Premium</em><br/>Style &amp; Comfort</h1>
-                <p class="hero-desc">Discover the finest footwear from world-class brands like Puma, Adidas, Woodland &amp; Skechers. Every pair crafted for the perfect blend of style and comfort.</p>
-                <div class="hero-btns">
-                  <a href="#" class="btn-main" style="background:linear-gradient(135deg,#FF6B6B,#FF8E53);box-shadow:0 8px 28px rgba(255,107,107,.5);"><i class="fas fa-shoe-prints"></i> Shop Now</a>
-                  <a href="#" class="btn-ghost"><i class="fas fa-play-circle"></i> View Collection</a>
-                </div>
-                <div class="hero-badges">
-                  <div class="hbadge"><i class="fas fa-star" style="color:var(--gold);"></i> Premium Brands</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-tag" style="color:#1CB5A0;"></i> Best Prices</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-truck" style="color:#FF8E53;"></i> Free Delivery</div>
-                </div>
-              </div>
+            <a class="navbar-brand" href="#">JPM <em style="font-style:italic;">Footwear</em></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+                <ul class="navbar-nav align-items-center gap-1">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#brandss">Brands</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
             </div>
-            <div class="col-lg-6">
-              <div class="hero-right">
-                <div class="hero-img-wrap">
-                  <div class="img-glow" style="background:radial-gradient(circle,#FF6B6B,#FF8E53);"></div>
-                  <img class="hero-product-img" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=90&auto=format&fit=crop" alt="Premium Sneakers" loading="eager"/>
-                  <div class="float-card fc-top"><span class="fc-icon" style="background:rgba(255,107,107,.3);">👟</span>Sports &amp; Casual Shoes</div>
-                  <div class="float-card fc-bottom"><span class="fc-icon" style="background:rgba(255,209,102,.3);">⭐</span>15+ Top Brands Available</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
+    </nav>
 
-    <!-- SLIDE 2 -->
-    <div class="carousel-item">
-      <div class="hero-slide" style="background:linear-gradient(135deg,#1a0510 0%,#3a0d26 50%,#5c1640 100%);">
-        <div class="slide-split" style="background:#FF8E53;"></div>
-        <div class="orb" style="width:480px;height:480px;background:radial-gradient(circle,#FF8E53,transparent);top:-100px;left:5%;"></div>
-        <div class="orb orb-2" style="width:280px;height:280px;background:radial-gradient(circle,#6C63FF,transparent);bottom:10%;left:30%;"></div>
-        <div class="orb orb-3" style="width:220px;height:220px;background:radial-gradient(circle,#FFD166,transparent);top:20%;right:8%;"></div>
+    <!-- CAROUSEL — pure custom, no Bootstrap carousel JS at all -->
+    <!-- ════════════════════════════════════════
+     HERO CAROUSEL
+    ════════════════════════════════════════ -->
+    <section id="home">
+        <div id="heroCarousel">
+            <div class="carousel-inner">
+
+                <!-- SLIDE 1 -->
+                <div class="carousel-item active">
+                    <div class="hero-slide"
+                        style="background:linear-gradient(135deg,#0B1D3A 0%,#102a55 50%,#0d2040 100%);">
+                        <div class="slide-split" style="background:#FF6B6B;"></div>
+                        <div class="orb"
+                            style="width:500px;height:500px;background:radial-gradient(circle,#FF6B6B,transparent);top:-120px;right:5%;">
+                        </div>
+                        <div class="orb orb-2"
+                            style="width:300px;height:300px;background:radial-gradient(circle,#FFD166,transparent);bottom:5%;right:35%;">
+                        </div>
+                        <div class="orb orb-3"
+                            style="width:200px;height:200px;background:radial-gradient(circle,#FF8E53,transparent);top:30%;left:5%;">
+                        </div>
+                        <div class="container">
+                            <div class="row align-items-center gy-4">
+                                <div class="col-lg-6">
+                                    <div class="hero-left">
+                                        <div class="hero-eyebrow" style="color:var(--gold);"><span class="line"
+                                                style="background:var(--gold);"></span>New Collection 2024<span
+                                                class="line" style="background:var(--gold);"></span></div>
+                                        <h1 class="hero-title">Step Into<br /><em
+                                                style="color:var(--gold);">Premium</em><br />Style &amp; Comfort</h1>
+                                        <p class="hero-desc">Discover the finest footwear from world-class brands like
+                                            Puma, Adidas, Woodland &amp; Skechers. Every pair crafted for the perfect
+                                            blend of style and comfort.</p>
+                                        <div class="hero-btns">
+                                            <a href="#gallery" class="btn-main"
+                                                style="background:linear-gradient(135deg,#FF6B6B,#FF8E53);box-shadow:0 8px 28px rgba(255,107,107,.5);"><i
+                                                    class="fas fa-shoe-prints"></i> Shop Now</a>
+                                            <a href="#gallery" class="btn-ghost"><i class="fas fa-play-circle"></i> View
+                                                Collection</a>
+                                        </div>
+                                        <div class="hero-badges">
+                                            <div class="hbadge"><i class="fas fa-star" style="color:var(--gold);"></i>
+                                                Premium Brands</div>
+                                            <div class="hbadge-sep"></div>
+                                            <div class="hbadge"><i class="fas fa-tag" style="color:#1CB5A0;"></i> Best
+                                                Prices</div>
+                                            <div class="hbadge-sep"></div>
+                                            <div class="hbadge"><i class="fas fa-truck" style="color:#FF8E53;"></i> Free
+                                                Delivery</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="hero-right">
+                                        <div class="hero-img-wrap">
+                                            <div class="img-glow"
+                                                style="background:radial-gradient(circle,#FF6B6B,#FF8E53);"></div>
+                                            <img class="hero-product-img"
+                                                src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=90&auto=format&fit=crop"
+                                                alt="Premium Sneakers" loading="eager" />
+                                            <div class="float-card fc-top"><span class="fc-icon"
+                                                    style="background:rgba(255,107,107,.3);">👟</span>Sports &amp;
+                                                Casual Shoes</div>
+                                            <div class="float-card fc-bottom"><span class="fc-icon"
+                                                    style="background:rgba(255,209,102,.3);">⭐</span>15+ Top Brands
+                                                Available</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 2 -->
+                <div class="carousel-item">
+                    <div class="hero-slide"
+                        style="background:linear-gradient(135deg,#1a0510 0%,#3a0d26 50%,#5c1640 100%);">
+                        <div class="slide-split" style="background:#FF8E53;"></div>
+                        <div class="orb"
+                            style="width:480px;height:480px;background:radial-gradient(circle,#FF8E53,transparent);top:-100px;left:5%;">
+                        </div>
+                        <div class="orb orb-2"
+                            style="width:280px;height:280px;background:radial-gradient(circle,#6C63FF,transparent);bottom:10%;left:30%;">
+                        </div>
+                        <div class="orb orb-3"
+                            style="width:220px;height:220px;background:radial-gradient(circle,#FFD166,transparent);top:20%;right:8%;">
+                        </div>
+                        <div class="container">
+                            <div class="row align-items-center gy-4">
+                                <div class="col-lg-6">
+                                    <div class="hero-left">
+                                        <div class="hero-eyebrow" style="color:#FF8E53;"><span class="line"
+                                                style="background:#FF8E53;"></span>Trending Styles<span class="line"
+                                                style="background:#FF8E53;"></span></div>
+                                        <h1 class="hero-title">Bags for<br /><em
+                                                style="color:#FF8E53;">Every</em><br />Journey</h1>
+                                        <p class="hero-desc">From premium backpacks to hard-shell trolleys — explore our
+                                            curated bag collection from VIP, Skybags, Safari &amp; American Tourister.
+                                        </p>
+                                        <div class="hero-btns">
+                                            <a href="#products" class="btn-main"
+                                                style="background:linear-gradient(135deg,#FF8E53,#FFD166);box-shadow:0 8px 28px rgba(255,142,83,.5);"><i
+                                                    class="fas fa-suitcase-rolling"></i> Shop Bags</a>
+                                            <a href="#gallery" class="btn-ghost"><i class="fas fa-images"></i> View Products</a>
+                                        </div>
+                                        <div class="hero-badges">
+                                            <div class="hbadge"><i class="fas fa-shield-alt" style="color:#FF8E53;"></i>
+                                                Durable Quality</div>
+                                            <div class="hbadge-sep"></div>
+                                            <div class="hbadge"><i class="fas fa-palette" style="color:#6C63FF;"></i>
+                                                Stylish Designs</div>
+                                            <div class="hbadge-sep"></div>
+                                            <div class="hbadge"><i class="fas fa-boxes" style="color:var(--gold);"></i>
+                                                All Sizes</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="hero-right">
+                                        <div class="hero-img-wrap">
+                                            <div class="img-glow"
+                                                style="background:radial-gradient(circle,#FF8E53,#FFD166);"></div>
+                                            <img class="hero-product-img"
+                                                src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700&q=90&auto=format&fit=crop"
+                                                alt="Travel Backpack" loading="lazy" />
+                                            <div class="float-card fc-top"><span class="fc-icon"
+                                                    style="background:rgba(255,142,83,.3);">🎒</span>Backpacks &amp;
+                                                Travel Bags</div>
+                                            <div class="float-card fc-bottom"><span class="fc-icon"
+                                                    style="background:rgba(108,99,255,.3);">✈️</span>American Tourister
+                                                · VIP · Safari</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="carousel-item">
+                    <div class="hero-slide"
+                        style="background:linear-gradient(135deg,#03101a 0%,#063530 50%,#084038 100%);">
+                        <div class="slide-split" style="background:#1CB5A0;"></div>
+                        <div class="orb"
+                            style="width:500px;height:500px;background:radial-gradient(circle,#1CB5A0,transparent);top:-100px;right:6%;">
+                        </div>
+                        <div class="orb orb-2"
+                            style="width:300px;height:300px;background:radial-gradient(circle,#FFD166,transparent);bottom:5%;right:25%;">
+                        </div>
+                        <div class="orb orb-3"
+                            style="width:220px;height:220px;background:radial-gradient(circle,#6C63FF,transparent);top:25%;left:4%;">
+                        </div>
+                        <div class="container">
+                            <div class="row align-items-center gy-4">
+                                <div class="col-lg-6">
+                                    <div class="hero-left">
+                                        <div class="hero-eyebrow" style="color:#1CB5A0;"><span class="line"
+                                                style="background:#1CB5A0;"></span>Travel in Style<span class="line"
+                                                style="background:#1CB5A0;"></span></div>
+                                        <h1 class="hero-title">Trolleys &amp;<br /><em
+                                                style="color:#1CB5A0;">Luggage</em><br />Collection</h1>
+                                        <p class="hero-desc">Premium hard &amp; soft shell trolley bags in all sizes —
+                                            cabin to check-in. Trusted brands: American Tourister, VIP, Skybags &amp;
+                                            Safari.</p>
+                                        <div class="hero-btns">
+                                            <a href="#gallery" class="btn-main"
+                                                style="background:linear-gradient(135deg,#1CB5A0,#6C63FF);box-shadow:0 8px 28px rgba(28,181,160,.5);"><i
+                                                    class="fas fa-suitcase"></i> Explore Trolleys</a>
+                                            <a href="#products" class="btn-ghost"><i class="fas fa-tags"></i> Best Products</a>
+                                        </div>
+                                        <div class="hero-badges">
+                                            <div class="hbadge"><i class="fas fa-plane" style="color:#1CB5A0;"></i>
+                                                Cabin &amp; Check-In</div>
+                                            <div class="hbadge-sep"></div>
+                                            <div class="hbadge"><i class="fas fa-lock" style="color:var(--gold);"></i>
+                                                Secure Locks</div>
+                                            <div class="hbadge-sep"></div>
+                                            <div class="hbadge"><i class="fas fa-feather" style="color:#FF8E53;"></i>
+                                                Lightweight</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="hero-right">
+                                        <div class="hero-img-wrap">
+                                            <div class="img-glow"
+                                                style="background:radial-gradient(circle,#1CB5A0,#6C63FF);"></div>
+                                            <img class="hero-product-img"
+                                                src="https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=700&q=90&auto=format&fit=crop"
+                                                alt="Travel Trolley" loading="lazy" />
+                                            <div class="float-card fc-top"><span class="fc-icon"
+                                                    style="background:rgba(28,181,160,.3);">🧳</span>Travel Trolleys
+                                                &amp; Suitcases</div>
+                                            <div class="float-card fc-bottom"><span class="fc-icon"
+                                                    style="background:rgba(255,209,102,.3);">🌍</span>Built for Every
+                                                Journey</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SLIDE 4 -->
+                <div class="carousel-item">
+                    <div class="hero-slide"
+                        style="background:linear-gradient(135deg,#1a0520 0%,#30084a 50%,#200a38 100%);">
+                        <div class="slide-split" style="background:#6C63FF;"></div>
+                        <div class="orb"
+                            style="width:480px;height:480px;background:radial-gradient(circle,#6C63FF,transparent);top:-80px;right:8%;">
+                        </div>
+                        <div class="orb orb-2"
+                            style="width:260px;height:260px;background:radial-gradient(circle,#FF6B6B,transparent);bottom:8%;left:20%;">
+                        </div>
+                        <div class="orb orb-3"
+                            style="width:200px;height:200px;background:radial-gradient(circle,#FFD166,transparent);top:15%;left:5%;">
+                        </div>
+                        <div class="container">
+                            <div class="row align-items-center gy-4">
+                                <div class="col-lg-6">
+                                    <div class="hero-left">
+                                        <div class="hero-eyebrow" style="color:#c4aaff;"><span class="line"
+                                                style="background:#c4aaff;"></span>Exclusively for Her<span class="line"
+                                                style="background:#c4aaff;"></span></div>
+                                        <h1 class="hero-title">Ladies<br /><em
+                                                style="color:#c4aaff;">Handbag</em><br />Collection</h1>
+                                        <p class="hero-desc">Chic totes, elegant clutches, satchels and party purses —
+                                            premium handbags designed to complement every style and every occasion.</p>
+                                        <div class="hero-btns">
+                                            <a href="#gallery" class="btn-main"
+                                                style="background:linear-gradient(135deg,#6C63FF,#FF6B6B);box-shadow:0 8px 28px rgba(108,99,255,.5);"><i
+                                                    class="fas fa-shopping-bag"></i> Shop Handbags</a>
+                                            <a href="#gallery" class="btn-ghost"><i class="fas fa-heart"></i> Wishlist</a>
+                                        </div>
+                                        <div class="hero-badges">
+                                            <div class="hbadge"><i class="fas fa-gem" style="color:#c4aaff;"></i>
+                                                Premium Quality</div>
+                                            <div class="hbadge-sep"></div>
+                                            <div class="hbadge"><i class="fas fa-paint-brush"
+                                                    style="color:#FF6B6B;"></i> Trendy Designs</div>
+                                            <div class="hbadge-sep"></div>
+                                            <div class="hbadge"><i class="fas fa-gift" style="color:var(--gold);"></i>
+                                                Gift Worthy</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="hero-right">
+                                        <div class="hero-img-wrap">
+                                            <div class="img-glow"
+                                                style="background:radial-gradient(circle,#6C63FF,#FF6B6B);"></div>
+                                            <img class="hero-product-img"
+                                                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&q=90&auto=format&fit=crop"
+                                                alt="Ladies Handbag" loading="lazy" />
+                                            <div class="float-card fc-top"><span class="fc-icon"
+                                                    style="background:rgba(108,99,255,.3);">👜</span>Totes · Clutches ·
+                                                Satchels</div>
+                                            <div class="float-card fc-bottom"><span class="fc-icon"
+                                                    style="background:rgba(255,107,107,.3);">💖</span>Perfect for Every
+                                                Occasion</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /.carousel-inner -->
+
+            <div class="c-prev" id="cPrev"><i class="fas fa-chevron-left"></i></div>
+            <div class="c-next" id="cNext"><i class="fas fa-chevron-right"></i></div>
+
+            <div class="hero-progress" id="heroDots">
+                <div class="hp-dot active" data-idx="0">
+                    <div class="hp-dot-fill"></div>
+                </div>
+                <div class="hp-dot" data-idx="1">
+                    <div class="hp-dot-fill"></div>
+                </div>
+                <div class="hp-dot" data-idx="2">
+                    <div class="hp-dot-fill"></div>
+                </div>
+                <div class="hp-dot" data-idx="3">
+                    <div class="hp-dot-fill"></div>
+                </div>
+            </div>
+
+            <div class="scroll-hint">
+                <div class="scroll-line"></div><span>Scroll</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- ABOUT -->
+    <section id="about">
         <div class="container">
-          <div class="row align-items-center gy-4">
-            <div class="col-lg-6">
-              <div class="hero-left">
-                <div class="hero-eyebrow" style="color:#FF8E53;">
-                  <span class="line" style="background:#FF8E53;"></span>Trending Styles<span class="line" style="background:#FF8E53;"></span>
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 reveal">
+                    <div class="about-wrap">
+                        <div class="about-main-box">
+                            <img src="images/about.png" class="img-fluid">
+                        </div>
+                        <div class="about-badge">
+                            <big>10+</big>
+                            Years<br /><small>of Trust</small>
+                        </div>
+                     
+                    </div>
                 </div>
-                <h1 class="hero-title">Bags for<br/><em style="color:#FF8E53;">Every</em><br/>Journey</h1>
-                <p class="hero-desc">From premium backpacks to hard-shell trolleys — explore our curated bag collection from VIP, Skybags, Safari &amp; American Tourister.</p>
-                <div class="hero-btns">
-                  <a href="#" class="btn-main" style="background:linear-gradient(135deg,#FF8E53,#FFD166);box-shadow:0 8px 28px rgba(255,142,83,.5);"><i class="fas fa-suitcase-rolling"></i> Shop Bags</a>
-                  <a href="#" class="btn-ghost"><i class="fas fa-images"></i> View Gallery</a>
+                <div class="col-lg-7 ps-lg-5 reveal d2">
+                    <div class="about-content">
+                        <div class="eyebrow"><span></span>Our Story</div>
+                        <h2>Your Trusted Destination for <span
+                                style="background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Footwear
+                                & More</span></h2>
+                        <p style="margin-top:16px;">JPM Footwear has been a cornerstone of quality retail, offering a
+                            handpicked range of branded footwear, bags, and school essentials. We believe that great
+                            shoes transform not just your look — but your confidence.</p>
+                        <p>From premium sneakers and formal shoes to comfy chappals, stylish handbags, travel trolleys,
+                            and school stationery — we bring the world's most trusted brands under one roof.</p>
+                        <div class="atags">
+                            <span class="atag">Premium Quality</span>
+                            <span class="atag">Trusted Brands</span>
+                            <span class="atag">Best Prices</span>
+                            <span class="atag">Wide Selection</span>
+                            <span class="atag">Customer First</span>
+                        </div>
+                        <div class="stats">
+                            <div><span class="stat-n">15+</span>
+                                <p class="stat-l">Top Brands</p>
+                            </div>
+                            <div><span class="stat-n">5K+</span>
+                                <p class="stat-l">Happy Customers</p>
+                            </div>
+                            <div><span class="stat-n">6</span>
+                                <p class="stat-l">Categories</p>
+                            </div>
+                            <div><span class="stat-n">10+</span>
+                                <p class="stat-l">Yrs Experience</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="hero-badges">
-                  <div class="hbadge"><i class="fas fa-shield-alt" style="color:#FF8E53;"></i> Durable Quality</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-palette" style="color:#6C63FF;"></i> Stylish Designs</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-boxes" style="color:var(--gold);"></i> All Sizes</div>
-                </div>
-              </div>
             </div>
-            <div class="col-lg-6">
-              <div class="hero-right">
-                <div class="hero-img-wrap">
-                  <div class="img-glow" style="background:radial-gradient(circle,#FF8E53,#FFD166);"></div>
-                  <img class="hero-product-img" src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700&q=90&auto=format&fit=crop" alt="Travel Backpack" loading="lazy"/>
-                  <div class="float-card fc-top"><span class="fc-icon" style="background:rgba(255,142,83,.3);">🎒</span>Backpacks &amp; Travel Bags</div>
-                  <div class="float-card fc-bottom"><span class="fc-icon" style="background:rgba(108,99,255,.3);">✈️</span>American Tourister · VIP · Safari</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- SLIDE 3 -->
-    <div class="carousel-item">
-      <div class="hero-slide" style="background:linear-gradient(135deg,#03101a 0%,#063530 50%,#084038 100%);">
-        <div class="slide-split" style="background:#1CB5A0;"></div>
-        <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,#1CB5A0,transparent);top:-100px;right:6%;"></div>
-        <div class="orb orb-2" style="width:300px;height:300px;background:radial-gradient(circle,#FFD166,transparent);bottom:5%;right:25%;"></div>
-        <div class="orb orb-3" style="width:220px;height:220px;background:radial-gradient(circle,#6C63FF,transparent);top:25%;left:4%;"></div>
+    <!-- ════════════════════════════════════════
+     TOP BRANDS
+    ════════════════════════════════════════ -->
+    <section class="brands-section" id="brandss">
         <div class="container">
-          <div class="row align-items-center gy-4">
-            <div class="col-lg-6">
-              <div class="hero-left">
-                <div class="hero-eyebrow" style="color:#1CB5A0;">
-                  <span class="line" style="background:#1CB5A0;"></span>Travel in Style<span class="line" style="background:#1CB5A0;"></span>
-                </div>
-                <h1 class="hero-title">Trolleys &amp;<br/><em style="color:#1CB5A0;">Luggage</em><br/>Collection</h1>
-                <p class="hero-desc">Premium hard &amp; soft shell trolley bags in all sizes — cabin to check-in. Trusted brands: American Tourister, VIP, Skybags &amp; Safari.</p>
-                <div class="hero-btns">
-                  <a href="#" class="btn-main" style="background:linear-gradient(135deg,#1CB5A0,#6C63FF);box-shadow:0 8px 28px rgba(28,181,160,.5);"><i class="fas fa-suitcase"></i> Explore Trolleys</a>
-                  <a href="#" class="btn-ghost"><i class="fas fa-tags"></i> Best Deals</a>
-                </div>
-                <div class="hero-badges">
-                  <div class="hbadge"><i class="fas fa-plane" style="color:#1CB5A0;"></i> Cabin &amp; Check-In</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-lock" style="color:var(--gold);"></i> Secure Locks</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-feather" style="color:#FF8E53;"></i> Lightweight</div>
-                </div>
-              </div>
+            <p class="section-sub">Trusted By</p>
+            <h2 class="section-title">Top Brands</h2>
+            <div class="brands-divider">
+                <span></span><i class="fas fa-star"></i><span></span>
             </div>
-            <div class="col-lg-6">
-              <div class="hero-right">
-                <div class="hero-img-wrap">
-                  <div class="img-glow" style="background:radial-gradient(circle,#1CB5A0,#6C63FF);"></div>
-                  <img class="hero-product-img" src="https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=700&q=90&auto=format&fit=crop" alt="Travel Trolley" loading="lazy"/>
-                  <div class="float-card fc-top"><span class="fc-icon" style="background:rgba(28,181,160,.3);">🧳</span>Travel Trolleys &amp; Suitcases</div>
-                  <div class="float-card fc-bottom"><span class="fc-icon" style="background:rgba(255,209,102,.3);">🌍</span>Built for Every Journey</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
 
-    <!-- SLIDE 4 -->
-    <div class="carousel-item">
-      <div class="hero-slide" style="background:linear-gradient(135deg,#1a0520 0%,#30084a 50%,#200a38 100%);">
-        <div class="slide-split" style="background:#6C63FF;"></div>
-        <div class="orb" style="width:480px;height:480px;background:radial-gradient(circle,#6C63FF,transparent);top:-80px;right:8%;"></div>
-        <div class="orb orb-2" style="width:260px;height:260px;background:radial-gradient(circle,#FF6B6B,transparent);bottom:8%;left:20%;"></div>
-        <div class="orb orb-3" style="width:200px;height:200px;background:radial-gradient(circle,#FFD166,transparent);top:15%;left:5%;"></div>
+        <div class="marquee-wrapper">
+            <!-- The track is duplicated (set A + set B) for seamless looping -->
+            <div class="marquee-track" id="marqueeTrack">
+
+                <!-- ── SET A ── -->
+                <div class="brand-item"><img src="images/brands/puma.png" alt="Puma"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>PUMA</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/adidas.png" alt="Adidas"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>ADIDAS</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/lee_cooper.png" alt="Lee Cooper"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Lee Cooper</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/woodland.png" alt="Woodland"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Woodland</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/buckaroo.png" alt="Buckaroo"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Buckaroo</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/skechers.png" alt="Skechers"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>SKECHERS</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/sparx.png" alt="Sparx"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Sparx</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/walkaroo.png" alt="Walkaroo"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Walkaroo</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/inblu.png" alt="Inblu"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Inblu</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/reebok.png" alt="Reebok"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Reebok</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/vip.png" alt="VIP"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>VIP</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/american_tourister.png" alt="American Tourister"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>American Tourister</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/skybags.png" alt="Skybags"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Skybags</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/safari.png" alt="Safari"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Safari</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/bata.png" alt="Bata"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Bata</span>'" />
+                </div>
+
+                <!-- ── SET B (exact duplicate for seamless loop) ── -->
+                <div class="brand-item"><img src="images/brands/puma.png" alt="Puma"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>PUMA</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/adidas.png" alt="Adidas"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>ADIDAS</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/lee_cooper.png" alt="Lee Cooper"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Lee Cooper</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/woodland.png" alt="Woodland"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>WOODLAND</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/buckaroo.png" alt="Buckaroo"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Buckaroo</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/skechers.png" alt="Skechers"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>SKECHERS</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/sparx.png" alt="Sparx"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Sparx</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/walkaroo.png" alt="Walkaroo"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Walkaroo</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/inblu.png" alt="Inblu"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>Inblu</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/reebok.png" alt="Reebok"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>REEBOK</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/vip.png" alt="VIP"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>VIP</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/american_tourister.png" alt="VIP"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>VIP</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/skybags.png" alt="Skybags"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>SKYBAGS</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/safari.png" alt="Safari"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>SAFARI</span>'" />
+                </div>
+                <div class="brand-item"><img src="images/brands/bata.png" alt="Bata"
+                        onerror="this.closest('.brand-item').innerHTML='<span style=\'font-weight:700;font-size:1.2rem;color:#0B1D3A;letter-spacing:1px;\'>BATA</span>'" />
+                </div>
+
+
+            </div><!-- /.marquee-track -->
+        </div><!-- /.marquee-wrapper -->
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
         <div class="container">
-          <div class="row align-items-center gy-4">
-            <div class="col-lg-6">
-              <div class="hero-left">
-                <div class="hero-eyebrow" style="color:#c4aaff;">
-                  <span class="line" style="background:#c4aaff;"></span>Exclusively for Her<span class="line" style="background:#c4aaff;"></span>
-                </div>
-                <h1 class="hero-title">Ladies<br/><em style="color:#c4aaff;">Handbag</em><br/>Collection</h1>
-                <p class="hero-desc">Chic totes, elegant clutches, satchels and party purses — premium handbags designed to complement every style and every occasion.</p>
-                <div class="hero-btns">
-                  <a href="#" class="btn-main" style="background:linear-gradient(135deg,#6C63FF,#FF6B6B);box-shadow:0 8px 28px rgba(108,99,255,.5);"><i class="fas fa-shopping-bag"></i> Shop Handbags</a>
-                  <a href="#" class="btn-ghost"><i class="fas fa-heart"></i> Wishlist</a>
-                </div>
-                <div class="hero-badges">
-                  <div class="hbadge"><i class="fas fa-gem" style="color:#c4aaff;"></i> Premium Quality</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-paint-brush" style="color:#FF6B6B;"></i> Trendy Designs</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-gift" style="color:var(--gold);"></i> Gift Worthy</div>
-                </div>
-              </div>
+            <div class="text-center reveal" style="margin-bottom:56px;">
+                <div class="eyebrow" style="justify-content:center;"><span></span>What We Carry<span></span></div>
+                <h2 class="sec-title">Our <span class="hl">Product</span> Categories</h2>
+                <p class="sec-sub mx-auto mt-3">Explore our wide range of quality products sourced from the world's most
+                    trusted brands.</p>
             </div>
-            <div class="col-lg-6">
-              <div class="hero-right">
-                <div class="hero-img-wrap">
-                  <div class="img-glow" style="background:radial-gradient(circle,#6C63FF,#FF6B6B);"></div>
-                  <img class="hero-product-img" src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&q=90&auto=format&fit=crop" alt="Ladies Handbag" loading="lazy"/>
-                  <div class="float-card fc-top"><span class="fc-icon" style="background:rgba(108,99,255,.3);">👜</span>Totes · Clutches · Satchels</div>
-                  <div class="float-card fc-bottom"><span class="fc-icon" style="background:rgba(255,107,107,.3);">💖</span>Perfect for Every Occasion</div>
+            <div class="row g-4">
+                <div class="col-sm-6 col-lg-4 reveal d1">
+                    <div class="pc t-coral">
+                        <div class="pc-ico">
+                            <img src="images/clogs.jpg" alt="Footwear" class="img-fluid">
+                        </div>
+                        <div class="pc-body">
+                            <span class="pc-badge">Chappels</span>
+                            <h4>Sports & Casual Footwear</h4>
+                            <p>High-performance sneakers, sports shoes & casual styles from Puma, Adidas, Reebok &
+                                Skechers.</p>
+                            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="col-sm-6 col-lg-4 reveal d2">
+                    <div class="pc t-orange">
+                        <div class="pc-ico">
+                            <img src="images/shoe.jpg" alt="Footwear" class="img-fluid">
+                        </div>
+                        <div class="pc-body">
+                            <span class="pc-badge">Shoes</span>
+                            <h4>Formal Shoes</h4>
+                            <p>Comfortable chappals, slippers & elegant formal shoes from Walkaroo, Bata, Woodland &
+                                Buckaroo.</p>
+                            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 reveal d3">
+                    <div class="pc t-teal">
+                        <div class="pc-ico">
+                            <img src="images/backbags.avif" alt="Back Bags" class="img-fluid">
+                        </div>
+                        <div class="pc-body">
+                            <span class="pc-badge">Back Bags</span>
+                            <h4>Backpacks & School Bags</h4>
+                            <p>Stylish, durable backpacks for college, travel & school from Skybags, VIP, Safari &
+                                American Tourister.</p>
+                            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 reveal d1">
+                    <div class="pc t-gold">
+                        <div class="pc-ico">
+                            <img src="images/handbags.jpg" alt="Handbags" class="img-fluid">
+                        </div>
+                        <div class="pc-body">
+                            <span class="pc-badge">Ladies Handbags</span>
+                            <h4>Ladies Handbags</h4>
+                            <p>Chic totes, clutches, satchels & party purses — premium ladies handbags for every
+                                occasion.</p>
+                            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 reveal d2">
+                    <div class="pc t-purple">
+                        <div class="pc-ico">
+                            <img src="images/trolly.webp" alt="Trolley" class="img-fluid">
+                        </div>
+                        <div class="pc-body">
+                            <span class="pc-badge">Trolley</span>
+                            <h4>Travel Trolleys & Luggage</h4>
+                            <p>Lightweight hard & soft shell trolley bags from VIP, Safari & American Tourister in all
+                                sizes.</p>
+                            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4 reveal d3">
+                    <div class="pc t-blue">
+                        <div class="pc-ico">
+                            <img src="images/stationery.webp" alt="Stationery" class="img-fluid">
+                        </div>
+                        <div class="pc-body">
+                            <span class="pc-badge">School Stationery</span>
+                            <h4>School Stationery</h4>
+                            <p>Pens, pencils, notebooks, art supplies and every essential for students of all grade
+                                levels.</p>
+                            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+    </section>
+
+    <!-- ════════════════════════════════
+     GALLERY SECTION
+════════════════════════════════ -->
+    <section id="gallery" class="pb-4">
+        <div class="container">
+
+            <!-- Heading -->
+            <div class="text-center mb-4">
+                <div class="eyebrow" style="justify-content:center;">
+                    <span></span>Visual Showcase<span></span>
+                </div>
+                <h2 class="sec-title">Product <span class="hl">Gallery</span></h2>
+                <p class="sec-sub mx-auto mt-3">Browse our curated collection. Click any image to view full size.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="fbar">
+                <button class="fbtn active" data-f="all">All</button>
+                <button class="fbtn" data-f="footwear">Footwear</button>
+                <button class="fbtn" data-f="chappals">Chappals</button>
+                <button class="fbtn" data-f="backbag">Back Bags</button>
+                <button class="fbtn" data-f="handbag">Handbags</button>
+                <button class="fbtn" data-f="trolley">Trolley</button>
+                <button class="fbtn" data-f="stationary">Stationery</button>
+            </div>
+
+            <!-- Grid -->
+            <div class="gal-grid" id="gg">
+
+                <!-- FOOTWEAR -->
+                <div class="gi" data-cat="footwear">
+                    <img src="https://i.pinimg.com/1200x/dd/93/bd/dd93bdb010813606a073fc92d802dfa8.jpg"
+                        alt="Sports Shoes" loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="footwear">
+                    <img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80"
+                        alt="Running Shoes" loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="footwear">
+                    <img src="https://i.pinimg.com/736x/5c/9e/9c/5c9e9cf7ba74cf6a640c96f7b4033857.jpg"
+                        alt="Casual Shoes" loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="footwear">
+                    <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&q=80" alt="Formal Shoes"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+
+                <!-- CHAPPALS -->
+                <div class="gi" data-cat="handbag">
+                    <img src="https://images.unsplash.com/photo-1523779105320-d1cd346ff52b?w=600&q=80" alt="Sandals"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="chappals">
+                    <img src="images/gallery/chappel1.jpg" alt="Chappals" loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="chappals">
+                    <img src="https://i.pinimg.com/1200x/55/b6/ce/55b6ce80aa637ac38a44ce93d3ad3177.jpg" alt="Chappals"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="chappals">
+                    <img src="https://i.pinimg.com/1200x/8a/d3/6c/8ad36cf0cf2a3559b413e50eb09a4bfe.jpg" alt="Chappals"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="chappals">
+                    <img src="https://i.pinimg.com/1200x/b6/18/5c/b6185cf616fe6cf58928047d07a51122.jpg" alt="Chappals"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+
+                <!-- BACK BAGS -->
+                <div class="gi" data-cat="backbag">
+                    <img src="https://i.pinimg.com/1200x/71/a8/26/71a826701b1d06719934ddbb88f613c8.jpg" alt="Backpack"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="backbag">
+                    <img src="https://i.pinimg.com/1200x/15/8b/46/158b465f0951c734bf9d6ab60632c2d1.jpg" alt="School Bag"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="backbag">
+                    <img src="https://i.pinimg.com/1200x/c4/aa/48/c4aa48556ef1eba3fbc98851868e1b7a.jpg" alt="Laptop Bag"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="backbag">
+                    <img src="https://i.pinimg.com/736x/61/f8/80/61f88015a8ea524a33331328ca2eb792.jpg" alt="Laptop Bag"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+
+
+
+                <!-- HANDBAGS -->
+                <div class="gi" data-cat="handbag">
+                    <img src="https://i.pinimg.com/1200x/73/f1/55/73f15524d062f3f37bbb4fbe06b6f042.jpg" alt="Handbag"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="handbag">
+                    <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80" alt="Ladies Bag"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="handbag">
+                    <img src="https://i.pinimg.com/736x/98/26/be/9826bece4fd2c27042c0cd441327d0e8.jpg" alt="Clutch"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+
+                <!-- TROLLEY -->
+                <div class="gi" data-cat="trolley">
+                    <img src="https://i.pinimg.com/1200x/cb/c1/77/cbc177cd5dacc579067c232c9f4abf0c.jpg" alt="Trolley"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="trolley">
+                    <img src="https://i.pinimg.com/1200x/73/e3/13/73e313e675404b27efa2a5a877a64242.jpg" alt="Luggage"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="trolley">
+                    <img src="https://i.pinimg.com/1200x/dc/26/85/dc2685cc32b3e31febafef356853b429.jpg" alt="Suitcase"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="trolley">
+                    <img src="https://i.pinimg.com/1200x/39/93/2c/39932c224f01475b09e573017085cff7.jpg" alt="Suitcase"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+
+                <!-- STATIONERY -->
+                <div class="gi" data-cat="stationary">
+                    <img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=600&q=80" alt="Stationery"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="stationary">
+                    <img src="https://i.pinimg.com/736x/6d/95/6c/6d956cee37967a3fdd91bb665ce254c6.jpg" alt="Notebooks"
+                        loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="stationary">
+                    <img src="https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=600&q=80"
+                        alt="Art Supplies" loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+                <div class="gi" data-cat="stationary">
+                    <img src="https://i.pinimg.com/1200x/fb/69/79/fb697944b6d00e492d36d31bb7a7f59f.jpg"
+                        alt="Art Supplies" loading="lazy" />
+                    <div class="gi-zoom"><i class="fas fa-search-plus"></i></div>
+                </div>
+
+            </div><!-- /.gal-grid -->
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lb" id="lb">
+        <button class="lb-x" id="lbx"><i class="fas fa-times"></i></button>
+        <img id="lbi" src="" alt="Product" />
     </div>
 
-  </div><!-- /.carousel-inner -->
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
 
-  <!-- Controls — use data-bs-target only, no ride attributes here -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span>
-  </button>
+            <!-- Section Header -->
+            <div class="ct-head reveal">
+                <div class="eyebrow" style="justify-content:center;">
+                    <span></span>Find Us<span></span>
+                </div>
+                <h2 class="ct-title">Visit Our <span>Store Locations</span></h2>
+                <p class="ct-sub">Two convenient locations to serve you better. Walk in anytime during store hours —
+                    we'd love to see you!</p>
+                <div class="ct-line"></div>
+            </div>
 
-  <div class="hero-progress" id="heroDots">
-    <div class="hp-dot active" data-idx="0"></div>
-    <div class="hp-dot" data-idx="1"></div>
-    <div class="hp-dot" data-idx="2"></div>
-    <div class="hp-dot" data-idx="3"></div>
-  </div>
+            <div class="row g-4 align-items-start">
 
-  <div class="scroll-hint">
-    <div class="scroll-line"></div><span>Scroll</span>
-  </div>
+                <!-- ══ LEFT: 2 Location Cards ══ -->
+                <div class="col-lg-5">
+                    <div class="row g-4">
 
-</div>
-</section>
+                        <!-- Store 1 -->
+                        <div class="col-12 reveal d1">
+                            <div class="loc-card card-1">
+                                <div class="store-name">JPM Footwear</div>
+                                <div class="linfo">
+                                    <div class="linfo-ico ico1"><i class="fas fa-map-marker-alt"></i></div>
+                                    <div class="linfo-text">
+                                        <h6>Address - 1</h6>
+                                        <p>Vetturnimadam, Nagercoil, Tamil Nadu 629003</p>
+                                    </div>
+                                </div>
+                                <div class="linfo">
+                                    <div class="linfo-ico ico2"><i class="fas fa-map-marker-alt"></i></div>
+                                    <div class="linfo-text">
+                                        <h6>Address - 2</h6>
+                                        <p>17-62A, near Roundana, Post, Neyyoor, Thingal Nagar, Tamil Nadu 629802</p>
+                                    </div>
+                                </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-<script>
-(function(){
-  'use strict';
+                                <div class="linfo">
+                                    <div class="linfo-ico ico1"><i class="fas fa-phone"></i></div>
+                                    <div class="linfo-text">
+                                        <h6>Phone</h6>
+                                        <p>Ngl - 7448908900 &nbsp;|&nbsp; Monday Market - 8526263333</p>
+                                    </div>
+                                </div>
 
-  /* Navbar scroll */
-  const nav = document.getElementById('mainNav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), {passive:true});
+                                <div class="linfo">
+                                    <div class="linfo-ico ico2"><i class="fas fa-clock"></i></div>
+                                    <div class="linfo-text">
+                                        <h6>Store Hours</h6>
+                                        <p>Mon – Sat: 9:00 AM – 9:00 PM &nbsp;|&nbsp; Sun: 10:00 AM – 9:00 PM</p>
+                                    </div>
+                                </div>
 
-  /* Wait for DOM + Bootstrap to be fully ready */
-  window.addEventListener('load', function() {
+                                <div class="linfo">
+                                    <div class="linfo-ico ico3"><i class="fas fa-parking"></i></div>
+                                    <div class="linfo-text">
+                                        <h6>Parking</h6>
+                                        <p>Free parking available in front of the store</p>
+                                    </div>
+                                </div>
 
-    const el    = document.getElementById('heroCarousel');
-    const items = Array.from(el.querySelectorAll('.carousel-item'));
-    const dots  = Array.from(el.querySelectorAll('.hp-dot'));
+                                <a href="#gallery" target="_blank"
+                                    class="dir-btn d-1">
+                                    <i class="fas fa-directions"></i> View Collections
+                                </a>
+                            </div>
+                        </div>
 
-    /* ── Init Bootstrap Carousel via JS ONLY ──
-       No data-bs-ride on the element prevents double-init conflicts.
-       ride:'carousel' here tells Bootstrap to auto-play immediately.    */
-    const bsCarousel = new bootstrap.Carousel(el, {
-      interval : 5000,   /* 5 sec per slide */
-      ride     : 'carousel', /* start auto-play right away */
-      wrap     : true,
-      touch    : true,
-      keyboard : true,
-      pause    : 'hover'
-    });
+                    </div>
+                </div>
+                <!-- /LEFT -->
 
-    /* Force-start the auto cycle (belt-and-suspenders) */
-    bsCarousel.cycle();
+                <!-- ══ RIGHT: 2 Maps ══ -->
+                <div class="col-lg-7">
+                    <div class="row g-4">
 
-    /* Dot clicks */
-    dots.forEach(d => {
-      d.addEventListener('click', () => bsCarousel.to(+d.dataset.idx));
-    });
+                        <!-- Map 1 -->
+                        <div class="col-12 reveal d2">
+                            <div class="map-wrap">
+                                <div class="map-label">
+                                    <span class="map-dot" style="background:#FF6B6B;"></span>
+                                    Store 1 - Vetturnimadam, Nagercoil, Tamil Nadu 629003
+                                </div>
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3949.130697222849!2d77.41471307463391!3d8.18958689184198!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b04f1f966c23893%3A0xa4f4be6a4f6b769e!2sJPM%20FOOTWEAR!5e0!3m2!1sen!2sin!4v1771669118824!5m2!1sen!2sin"
+                                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
 
-    /* Active dot */
-    function setDot(i){
-      dots.forEach(d => d.classList.remove('active'));
-      if(dots[i]) dots[i].classList.add('active');
-    }
+                        <!-- Map 2 -->
+                        <div class="col-12 reveal d3">
+                            <div class="map-wrap">
+                                <div class="map-label">
+                                    <span class="map-dot" style="background:#1CB5A0;"></span>
+                                    Store 2 — near Roundana, Post, Neyyoor, Thingal Nagar
+                                </div>
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2325.5945214027543!2d77.30284608170913!3d8.202439339175381!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b04f95ccf474569%3A0x1023c28e8261d14b!2sJPM%20footwear!5e0!3m2!1sen!2sin!4v1771669053956!5m2!1sen!2sin"
+                                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
+                        </div>
 
-    /* Animate a slide */
-    function runAnim(item){
-      const hs = item.querySelector('.hero-slide');
-      hs.classList.remove('do-animate');
-      void hs.offsetHeight; /* reflow so CSS resets */
-      hs.classList.add('do-animate');
-    }
+                    </div>
+                </div>
+                <!-- /RIGHT MAPS -->
 
-    /* Stop animations (reset elements to opacity:0) */
-    function stopAnim(item){
-      item.querySelector('.hero-slide').classList.remove('do-animate');
-    }
+            </div>
+        </div>
 
-    /* slide event: fires BEFORE transition — update dot, clear outgoing */
-    el.addEventListener('slide.bs.carousel', function(e){
-      setDot(e.to);
-      stopAnim(items[e.from]);
-    });
+        <!-- ── Quick Contact Strip ── -->
+        <div class="quick-strip mt-5">
+            <div class="container">
+                <div class="row g-0 justify-content-center">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="qs-item">
+                            <div class="qs-ico" style="background:var(--g1);">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="qs-text">
+                                <p>Call Us</p>
+                                <a href="tel:+917448908900">+91 7448908900</a>
+                                <a href="tel:+918526263333">+91 8526263333</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="qs-item">
+                            <div class="qs-ico" style="background:var(--g3);">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="qs-text">
+                                <p>Email Us</p>
+                                <a href="mailto:jpmfootwear@gmail.com">jpmfootwear@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="qs-item">
+                            <div class="qs-ico" style="background:linear-gradient(135deg,#6C63FF,#FF6B6B);">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="qs-text">
+                                <p>Store Hours</p>
+                                <span>Mon–Sat: 9:00 AM – 9:00 PM</span>
+                                <span>Sunday: 10:00 AM – 9:00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    /* slid event: fires AFTER transition — animate incoming */
-    el.addEventListener('slid.bs.carousel', function(e){
-      runAnim(items[e.to]);
-    });
+    </section>
+    <!-- /CONTACT -->
 
-    /* Animate first slide on load */
-    setTimeout(function(){ runAnim(items[0]); }, 150);
 
-  });
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="row g-5">
 
-})();
-</script>
+                <!-- Brand column -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="f-brand">JPM Footwear</div>
+                    <p class="f-text">Your one-stop destination for premium branded footwear, bags, and school
+                        essentials. Quality and trust at every step.</p>
+                    <div class="soc mt-3">
+                        <a href="https://www.facebook.com/jpmfootwearofficial" class="si"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/jpm_footwear_ngl?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="si"><i class="fab fa-instagram"></i></a>
+                        <a href="https://api.whatsapp.com/send?phone=7448908900" class="si"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <!-- Products -->
+                <div class="col-lg-2 col-sm-4 col-6">
+                    <p class="f-h">Products</p>
+                    <ul class="f-ul">
+                        <li><a href="#">Footwear</a></li>
+                        <li><a href="#">Chappals</a></li>
+                        <li><a href="#">Back Bags</a></li>
+                        <li><a href="#">Handbags</a></li>
+                        <li><a href="#">Trolleys</a></li>
+                        <li><a href="#">Stationery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Brands -->
+                <div class="col-lg-2 col-sm-4 col-6">
+                    <p class="f-h">Brands</p>
+                    <ul class="f-ul">
+                        <li><a href="#">Woodland</a></li>
+                        <li><a href="#">Puma</a></li>
+                        <li><a href="#">Adidas</a></li>
+                        <li><a href="#">Skechers</a></li>
+                        <li><a href="#">Bata</a></li>
+                        <li><a href="#">VIP · Safari</a></li>
+                    </ul>
+                </div>
+
+                <!-- Locations -->
+                <div class="col-lg-4 col-sm-4">
+                    <p class="f-h">Our Locations</p>
+                    <div style="margin-bottom:16px;">
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                            <span
+                                style="width:8px;height:8px;border-radius:50%;background:var(--coral);display:inline-block;flex-shrink:0;"></span>
+                            <span style="color:rgba(255,255,255,.7);font-size:.82rem;font-weight:600;">Address 1
+                                </span>
+                        </div>
+                        <p style="font-size:.82rem;line-height:1.7;padding-left:16px;">Vetturnimadam, Nagercoil, Tamil Nadu 629003</p>
+                    </div>
+                    <div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                            <span
+                                style="width:8px;height:8px;border-radius:50%;background:#1CB5A0;display:inline-block;flex-shrink:0;"></span>
+                            <span style="color:rgba(255,255,255,.7);font-size:.82rem;font-weight:600;">Address 2</span>
+                        </div>
+                        <p style="font-size:.82rem;line-height:1.7;padding-left:16px;">17-62A, near Roundana, Post, Neyyoor, Thingal Nagar, Tamil Nadu 629802</p>
+                    </div>
+                   
+                </div>
+
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="f-bot">
+                <p>&copy; 2026 <span>JPM Footwear</span>. All rights reserved. Developed By <a href="https://feathersoftwares.com/" class="text-decoration-none" style="color: #FF6B6B;">Feather Softwares</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
+
+
+
+
+    <!-- jQuery + Bootstrap (for navbar collapse only) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
+
 </html>

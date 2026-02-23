@@ -3,483 +3,697 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>JPM Footwear – Home Carousel</title>
+<title>JPM Footwear – Walk in Style</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;0,800;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;0,800;1,700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --gold:#FFD166;--teal:#1CB5A0;--orange:#FF8E53;
-  --img-w:480px;--img-h:480px;
+  --coral:#FF6B6B;--orange:#FF8E53;--teal:#1CB5A0;
+  --navy:#0B1D3A;--gold:#FFD166;--purple:#6C63FF;
+  --light:#FFF9F5;--text:#1E1E2E;--muted:#7a7a9a;
+  --g1:linear-gradient(135deg,#FF6B6B,#FF8E53);
+  --g2:linear-gradient(135deg,#1CB5A0,#6C63FF);
+  --g3:linear-gradient(135deg,#FFD166,#FF6B6B);
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Outfit',sans-serif;overflow-x:hidden}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Outfit',sans-serif;background:var(--light);color:var(--text);overflow-x:hidden;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:#f0f0f0;}
+::-webkit-scrollbar-thumb{background:var(--coral);border-radius:10px;}
 
-/* NAVBAR */
-.navbar{
-  background:rgba(11,29,58,.97);backdrop-filter:blur(18px);
-  padding:14px 0;position:fixed;width:100%;top:0;z-index:1000;
-  transition:padding .3s,box-shadow .3s;
-  border-bottom:2px solid transparent;
-  border-image:linear-gradient(90deg,#FF6B6B,#FFD166,#1CB5A0) 1;
-}
-.navbar.scrolled{padding:10px 0;box-shadow:0 4px 30px rgba(0,0,0,.4)}
-.navbar-brand{
-  font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:800;
-  background:linear-gradient(135deg,#FF6B6B,#FF8E53);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;letter-spacing:1px;line-height:1;
-}
-.nav-link{color:rgba(255,255,255,.75)!important;font-size:.88rem;font-weight:500;
-  letter-spacing:.5px;padding:6px 14px!important;border-radius:20px;transition:color .2s,background .2s}
-.nav-link:hover{color:#fff!important;background:rgba(255,255,255,.08)}
-.navbar-toggler{border:1px solid rgba(255,255,255,.3)}
-.navbar-toggler-icon{filter:invert(1)}
+/* ── NAVBAR ── */
+.navbar{background:rgba(11,29,58,.97);backdrop-filter:blur(16px);padding:14px 0;position:fixed;width:100%;top:0;z-index:1000;transition:padding .3s,box-shadow .3s;border-bottom:2px solid transparent;border-image:linear-gradient(90deg,#FF6B6B,#FFD166,#1CB5A0) 1;}
+.navbar.scrolled{padding:9px 0;box-shadow:0 4px 30px rgba(0,0,0,.4);}
+.navbar-brand{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:800;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:1px;}
+.nav-link{color:rgba(255,255,255,.75)!important;font-size:.88rem;font-weight:500;letter-spacing:.5px;padding:6px 14px!important;border-radius:20px;transition:color .25s;}
+.nav-link:hover{color:#fff!important;}
+.navbar-toggler{border:1px solid rgba(255,255,255,.3);padding:5px 10px;}
+.navbar-toggler-icon{filter:invert(1);}
 
-/* CAROUSEL */
-#heroCarousel{margin-top:68px}
-/* Smooth slide transition */
-#heroCarousel .carousel-item{
-  transition:transform 0.75s cubic-bezier(.77,0,.18,1)!important;
-}
+/* ── HERO ── */
+#heroCarousel{margin-top:68px;}
+.hero-slide{height:94vh;min-height:560px;position:relative;display:flex;align-items:center;}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 8s ease;transform:scale(1.06);}
+.carousel-item.active .hero-bg{transform:scale(1);}
+.hero-overlay{position:absolute;inset:0;}
+.hero-content{position:relative;z-index:2;color:#fff;padding:0 40px;max-width:640px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:18px;}
+.hero-eyebrow span{width:28px;height:2px;background:var(--gold);display:inline-block;border-radius:2px;}
+.hero-content h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,5.5vw,4.8rem);line-height:1.06;font-weight:800;margin-bottom:22px;text-shadow:0 4px 30px rgba(0,0,0,.3);}
+.hero-content h1 em{font-style:italic;color:var(--gold);}
+.hero-content p{font-size:1rem;opacity:.83;line-height:1.75;margin-bottom:36px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-ph{background:var(--g1);color:#fff;border:none;padding:14px 36px;border-radius:50px;font-size:.9rem;font-weight:700;letter-spacing:.5px;text-decoration:none;box-shadow:0 8px 30px rgba(255,107,107,.5);transition:transform .25s,box-shadow .25s;display:inline-block;}
+.btn-ph:hover{transform:translateY(-3px);box-shadow:0 14px 40px rgba(255,107,107,.6);color:#fff;}
+.btn-oh{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.5);padding:12px 32px;border-radius:50px;font-size:.9rem;font-weight:600;text-decoration:none;transition:all .25s;display:inline-block;backdrop-filter:blur(6px);}
+.btn-oh:hover{background:rgba(255,255,255,.15);border-color:#fff;color:#fff;}
+.carousel-indicators button{width:8px;height:8px;border-radius:50%;border:2px solid rgba(255,255,255,.6);background:transparent;transition:all .3s;}
+.carousel-indicators .active{background:#fff;width:24px;border-radius:4px;}
+/* Hero floating orbs */
+.orb{position:absolute;border-radius:50%;pointer-events:none;animation:floatOrb 9s ease-in-out infinite;}
+@keyframes floatOrb{0%,100%{transform:translateY(0);}50%{transform:translateY(-22px);}}
 
-.hero-slide{
-  min-height:calc(100vh - 68px);
-  display:flex;align-items:center;
-  position:relative;overflow:hidden;
-}
+/* ── SECTION COMMONS ── */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;color:var(--coral);margin-bottom:12px;}
+.eyebrow span{width:28px;height:2px;background:var(--coral);border-radius:2px;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:800;color:var(--navy);line-height:1.15;}
+.hl{background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.sec-sub{font-size:.95rem;color:var(--muted);line-height:1.8;max-width:520px;}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.show{opacity:1;transform:none;}
+.d1{transition-delay:.1s;}.d2{transition-delay:.2s;}.d3{transition-delay:.3s;}
 
-.slide-split{position:absolute;inset:0;clip-path:polygon(58% 0,100% 0,100% 100%,42% 100%);opacity:.18;z-index:0;pointer-events:none}
-.orb{position:absolute;border-radius:50%;pointer-events:none;opacity:.12;animation:floatOrb 8s ease-in-out infinite;z-index:0}
-.orb-2{animation-delay:3s;animation-duration:11s}
-.orb-3{animation-delay:5.5s;animation-duration:9s}
-@keyframes floatOrb{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-28px) scale(1.04)}}
+/* ── ABOUT ── */
+#about{padding:110px 0;background:#fff;position:relative;overflow:hidden;}
+#about::before{content:'';position:absolute;top:-120px;right:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,107,.07),transparent 70%);pointer-events:none;}
+#about::after{content:'';position:absolute;bottom:-100px;left:-100px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(28,181,160,.07),transparent 70%);pointer-events:none;}
+.about-wrap{position:relative;}
+.about-main-box{width:100%;height:460px;background:linear-gradient(135deg,#f5ede4,#ece0d5);border-radius:24px 24px 90px 24px;display:flex;align-items:center;justify-content:center;box-shadow:0 30px 80px rgba(0,0,0,.1);position:relative;overflow:hidden;}
+.about-main-box::after{content:'';position:absolute;bottom:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,107,107,.08);}
+.about-icon-bg{font-size:10rem;opacity:.1;color:var(--navy);transform:rotate(-15deg);}
+.about-badge{position:absolute;top:28px;left:-18px;background:var(--g1);color:#fff;padding:18px 22px;border-radius:16px;font-family:'Cormorant Garamond',serif;font-weight:800;text-align:center;line-height:1.15;box-shadow:0 12px 40px rgba(255,107,107,.4);}
+.about-badge big{font-size:2.2rem;display:block;}
+.about-badge small{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;font-family:'Outfit',sans-serif;}
+.about-float{position:absolute;bottom:-28px;right:-18px;width:155px;height:155px;background:linear-gradient(135deg,#e8f9f6,#d0f5ee);border-radius:20px;border:5px solid #fff;box-shadow:0 20px 50px rgba(28,181,160,.2);display:flex;align-items:center;justify-content:center;}
+.about-content h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,2.8vw,2.6rem);font-weight:800;color:var(--navy);line-height:1.2;margin-bottom:18px;}
+.about-content p{font-size:.95rem;color:var(--muted);line-height:1.85;margin-bottom:14px;}
+.atags{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px;}
+.atag{background:#fff;border:1.5px solid #eee;padding:6px 18px;border-radius:50px;font-size:.78rem;font-weight:600;color:var(--navy);transition:all .2s;cursor:default;}
+.atag:hover{background:var(--g1);border-color:transparent;color:#fff;}
+.stats{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px;padding-top:26px;border-top:1px solid #f0f0f0;}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:2.3rem;font-weight:800;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1;}
+.stat-l{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:600;margin-top:4px;}
 
-/* LEFT CONTENT */
-.hero-left{position:relative;z-index:3;padding-right:40px}
-.hero-eyebrow{
-  display:inline-flex;align-items:center;gap:10px;
-  font-size:.72rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;
-  margin-bottom:20px;opacity:0;
-}
-.hero-eyebrow .line{width:30px;height:2px;border-radius:2px;display:inline-block}
-.hero-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(2.8rem,5.2vw,5rem);font-weight:800;line-height:1.06;
-  color:#fff;margin-bottom:22px;text-shadow:0 4px 30px rgba(0,0,0,.25);opacity:0;
-}
-.hero-title em{font-style:italic}
-.hero-desc{font-size:1rem;color:rgba(255,255,255,.78);line-height:1.8;max-width:460px;margin-bottom:38px;opacity:0}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0}
-.btn-main{
-  padding:14px 36px;border-radius:50px;font-size:.9rem;font-weight:700;
-  letter-spacing:.5px;text-decoration:none;border:none;cursor:pointer;
-  display:inline-flex;align-items:center;gap:8px;
-  transition:transform .25s,box-shadow .25s;color:#fff;
-}
-.btn-main:hover{transform:translateY(-3px);color:#fff}
-.btn-ghost{
-  padding:12px 32px;border-radius:50px;font-size:.9rem;font-weight:600;
-  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
-  border:2px solid rgba(255,255,255,.5);color:#fff;background:rgba(255,255,255,.07);
-  backdrop-filter:blur(8px);transition:all .25s;
-}
-.btn-ghost:hover{background:rgba(255,255,255,.18);border-color:#fff;color:#fff}
-.hero-badges{display:flex;align-items:center;gap:18px;margin-top:36px;flex-wrap:wrap;opacity:0}
-.hbadge{display:flex;align-items:center;gap:7px;font-size:.78rem;color:rgba(255,255,255,.6);font-weight:500}
-.hbadge i{font-size:.85rem}
-.hbadge-sep{width:1px;height:18px;background:rgba(255,255,255,.2)}
+/* ── BRANDS (transparent marquee) ── */
+#brands{padding:90px 0;background:var(--navy);position:relative;overflow:hidden;}
+#brands::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 50% 50%,rgba(255,107,107,.06) 0%,transparent 70%);}
+.brands-hdr{text-align:center;margin-bottom:54px;}
+.brands-hdr .sec-title{color:#fff;}
+.brand-wrap{overflow:hidden;position:relative;padding:14px 0;}
+.brand-wrap::before,.brand-wrap::after{content:'';position:absolute;top:0;bottom:0;width:130px;z-index:2;pointer-events:none;}
+.brand-wrap::before{left:0;background:linear-gradient(90deg,var(--navy),transparent);}
+.brand-wrap::after{right:0;background:linear-gradient(-90deg,var(--navy),transparent);}
+.brand-track{display:flex;width:max-content;animation:mq1 26s linear infinite;}
+.brand-track.rev{animation:mq2 30s linear infinite;}
+.brand-track:hover{animation-play-state:paused;}
+@keyframes mq1{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+@keyframes mq2{0%{transform:translateX(-50%);}100%{transform:translateX(0);}}
+.bpill{display:flex;align-items:center;justify-content:center;padding:0 36px;height:68px;white-space:nowrap;font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:700;letter-spacing:1px;color:rgba(255,255,255,.18);border-right:1px solid rgba(255,255,255,.07);transition:color .3s;cursor:default;}
+.bpill:hover{color:rgba(255,255,255,.9);}
+.b1{color:rgba(255,107,107,.5)!important;}.b1:hover{color:#FF6B6B!important;}
+.b2{color:rgba(255,209,102,.5)!important;}.b2:hover{color:#FFD166!important;}
+.b3{color:rgba(28,181,160,.5)!important;}.b3:hover{color:#1CB5A0!important;}
+.b4{color:rgba(108,99,255,.5)!important;}.b4:hover{color:#6C63FF!important;}
 
-/* ENTER ANIMATIONS via .do-animate on .hero-slide */
-.do-animate .hero-eyebrow {animation:fadeUp .6s .15s ease both}
-.do-animate .hero-title   {animation:fadeUp .7s .30s ease both}
-.do-animate .hero-desc    {animation:fadeUp .7s .45s ease both}
-.do-animate .hero-btns    {animation:fadeUp .7s .58s ease both}
-.do-animate .hero-badges  {animation:fadeUp .7s .70s ease both}
-.do-animate .hero-img-wrap{animation:imgIn  .8s .35s ease both}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@keyframes imgIn {from{opacity:0;transform:translateX(36px) scale(.95)}to{opacity:1;transform:translateX(0) scale(1)}}
+/* ── PRODUCTS ── */
+#products{padding:110px 0;background:var(--light);}
+.pc{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.07);transition:transform .35s,box-shadow .35s;height:100%;display:flex;flex-direction:column;}
+.pc:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,.13);}
+.pc-ico{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.pc-ico .ei{font-size:5rem;z-index:1;transition:transform .4s;}
+.pc:hover .ei{transform:scale(1.18) rotate(-6deg);}
+.pc-body{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column;}
+.pc-badge{display:inline-block;font-size:.67rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:50px;margin-bottom:10px;}
+.pc-body h4{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.pc-body p{font-size:.85rem;color:var(--muted);line-height:1.7;flex:1;}
+.pc-link{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;text-decoration:none;margin-top:16px;transition:gap .2s;}
+.pc-link:hover{gap:10px;}
+/* Color themes */
+.t-coral .pc-ico{background:linear-gradient(135deg,#FFE8E8,#FFDADA);}
+.t-coral .pc-badge{background:#FFE8E8;color:#FF6B6B;}
+.t-coral .pc-link{color:#FF6B6B;}
+.t-orange .pc-ico{background:linear-gradient(135deg,#FFF0E0,#FFE0C0);}
+.t-orange .pc-badge{background:#FFF0E0;color:#FF8E53;}
+.t-orange .pc-link{color:#FF8E53;}
+.t-teal .pc-ico{background:linear-gradient(135deg,#D0F5F0,#B0EDE6);}
+.t-teal .pc-badge{background:#D0F5F0;color:#1CB5A0;}
+.t-teal .pc-link{color:#1CB5A0;}
+.t-gold .pc-ico{background:linear-gradient(135deg,#FFF8D6,#FFF0B0);}
+.t-gold .pc-badge{background:#FFF8D6;color:#c9900a;}
+.t-gold .pc-link{color:#c9900a;}
+.t-purple .pc-ico{background:linear-gradient(135deg,#EDE9FF,#DAD3FF);}
+.t-purple .pc-badge{background:#EDE9FF;color:#6C63FF;}
+.t-purple .pc-link{color:#6C63FF;}
+.t-blue .pc-ico{background:linear-gradient(135deg,#D6EEFF,#B0D9FF);}
+.t-blue .pc-badge{background:#D6EEFF;color:#0077b6;}
+.t-blue .pc-link{color:#0077b6;}
 
-/* RIGHT IMAGE — uniform fixed box */
-.hero-right{position:relative;z-index:3;display:flex;align-items:center;justify-content:center;padding-left:20px}
-.hero-img-wrap{position:relative;width:var(--img-w);height:var(--img-h);max-width:100%;flex-shrink:0;opacity:0}
-.hero-product-img{
-  width:100%;height:100%;object-fit:cover;object-position:center;
-  border-radius:24px;display:block;
-  filter:drop-shadow(0 24px 50px rgba(0,0,0,.5));
-  animation:imgFloat 5s ease-in-out infinite;
-}
-@keyframes imgFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
-.img-glow{
-  position:absolute;width:80%;height:80%;border-radius:50%;top:10%;left:10%;
-  filter:blur(55px);opacity:.4;z-index:-1;animation:glowPulse 4s ease-in-out infinite;
-}
-@keyframes glowPulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.6;transform:scale(1.1)}}
-.float-card{
-  position:absolute;background:rgba(255,255,255,.12);backdrop-filter:blur(14px);
-  border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:12px 18px;
-  color:#fff;font-size:.8rem;font-weight:600;white-space:nowrap;
-  box-shadow:0 8px 30px rgba(0,0,0,.2);z-index:4;
-}
-.fc-top  {top:-14px;right:-18px;animation:floatCard1 5s ease-in-out infinite}
-.fc-bottom{bottom:-14px;left:-22px;animation:floatCard2 6s ease-in-out infinite}
-@keyframes floatCard1{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes floatCard2{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
-.fc-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;margin-right:8px;font-size:.9rem}
+/* ── GALLERY ── */
+#gallery{padding:110px 0;background:#fff;}
+.fbar{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:48px;}
+.fbtn{background:transparent;border:2px solid #e8e8e8;color:var(--muted);padding:9px 24px;border-radius:50px;font-size:.82rem;font-weight:700;letter-spacing:.5px;cursor:pointer;transition:all .25s;font-family:'Outfit',sans-serif;}
+.fbtn:hover,.fbtn.active{background:var(--g1);border-color:transparent;color:#fff;box-shadow:0 6px 20px rgba(255,107,107,.35);}
+.gal-grid{columns:4;column-gap:14px;}
+@media(max-width:1199px){.gal-grid{columns:3;}}
+@media(max-width:767px){.gal-grid{columns:2;}}
+@media(max-width:480px){.gal-grid{columns:1;}}
+.gi{break-inside:avoid;margin-bottom:14px;border-radius:14px;overflow:hidden;position:relative;cursor:pointer;display:block;}
+.gi.hidden{display:none;}
+.gi img{width:100%;display:block;transition:transform .5s ease;}
+.gi::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(11,29,58,.65));opacity:0;transition:opacity .3s;}
+.gi:hover img{transform:scale(1.07);}
+.gi:hover::after{opacity:1;}
+.gi-zoom{position:absolute;bottom:16px;left:50%;transform:translateX(-50%) translateY(12px);opacity:0;transition:all .3s;z-index:2;width:42px;height:42px;background:rgba(255,255,255,.9);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--coral);}
+.gi:hover .gi-zoom{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* CONTROLS */
-.carousel-control-prev,.carousel-control-next{
-  width:52px;height:52px;background:rgba(255,255,255,.12);backdrop-filter:blur(10px);
-  border:1px solid rgba(255,255,255,.2);border-radius:50%;
-  top:50%;transform:translateY(-50%);bottom:auto;transition:background .2s,transform .2s;
-}
-.carousel-control-prev{left:24px}
-.carousel-control-next{right:24px}
-.carousel-control-prev:hover,.carousel-control-next:hover{background:rgba(255,255,255,.25);transform:translateY(-50%) scale(1.08)}
-.carousel-control-prev-icon,.carousel-control-next-icon{width:18px;height:18px}
+/* Lightbox */
+.lb{display:none;position:fixed;inset:0;z-index:9999;background:rgba(6,14,30,.96);align-items:center;justify-content:center;}
+.lb.open{display:flex;}
+.lb img{max-width:90vw;max-height:88vh;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.6);animation:lbi .3s ease;}
+@keyframes lbi{from{opacity:0;transform:scale(.88);}to{opacity:1;transform:scale(1);}}
+.lb-x{position:absolute;top:20px;right:22px;font-size:1.3rem;color:#fff;cursor:pointer;background:rgba(255,255,255,.1);border:none;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.lb-x:hover{background:var(--coral);}
 
-/* PROGRESS DOTS */
-.hero-progress{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
-.hp-dot{position:relative;width:36px;height:4px;background:rgba(255,255,255,.25);border-radius:4px;overflow:hidden;cursor:pointer;transition:width .3s}
-.hp-dot.active{width:60px}
-.hp-dot::after{content:'';position:absolute;top:0;left:0;height:100%;width:0;background:#fff;border-radius:4px}
-.hp-dot.active::after{animation:progressFill 5s linear forwards}
-@keyframes progressFill{to{width:100%}}
+/* ── CONTACT ── */
+#contact{padding:110px 0;background:linear-gradient(135deg,var(--navy) 0%,#122645 60%,#1a1040 100%);position:relative;overflow:hidden;}
+#contact::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(255,107,107,.12),transparent 65%);}
+#contact::after{content:'';position:absolute;bottom:-150px;left:-150px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(28,181,160,.1),transparent 65%);}
+.c-wrap{position:relative;z-index:1;}
+.c-box{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:48px 44px;backdrop-filter:blur(10px);}
+.c-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.8rem);font-weight:800;color:#fff;line-height:1.2;margin-bottom:10px;}
+.c-title span{background:var(--g3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.c-sub{color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:40px;line-height:1.7;}
+.cinfo-row{display:flex;flex-direction:column;gap:26px;}
+.cinfo{display:flex;align-items:flex-start;gap:18px;}
+.cinfo-ico{width:50px;height:50px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:#fff;}
+.cinfo h6{color:#fff;font-size:.78rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:700;margin-bottom:4px;}
+.cinfo p{color:rgba(255,255,255,.55);font-size:.9rem;line-height:1.6;margin:0;}
+.cf label{color:rgba(255,255,255,.6);font-size:.76rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px;display:block;}
+.cf .fc{width:100%;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);color:#fff;border-radius:12px;padding:13px 18px;font-size:.9rem;font-family:'Outfit',sans-serif;transition:border-color .25s,background .25s;outline:none;}
+.cf .fc::placeholder{color:rgba(255,255,255,.28);}
+.cf .fc:focus{border-color:var(--coral);background:rgba(255,255,255,.1);}
+.cf select.fc option{background:#1a1a3e;color:#fff;}
+.cf textarea.fc{resize:vertical;min-height:108px;}
+.btn-send{width:100%;background:var(--g1);color:#fff;border:none;padding:15px;border-radius:12px;font-size:.95rem;font-weight:700;letter-spacing:.5px;font-family:'Outfit',sans-serif;cursor:pointer;box-shadow:0 10px 40px rgba(255,107,107,.45);transition:transform .25s,box-shadow .25s;}
+.btn-send:hover{transform:translateY(-3px);box-shadow:0 16px 50px rgba(255,107,107,.55);}
 
-/* SCROLL HINT */
-.scroll-hint{position:absolute;bottom:34px;right:40px;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.4);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;z-index:10}
-.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.5),transparent);animation:scrollDrop 2s ease-in-out infinite}
-@keyframes scrollDrop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* ── FOOTER ── */
+footer{background:#060e1e;padding:70px 0 28px;color:rgba(255,255,255,.4);}
+.f-brand{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:800;background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:inline-block;margin-bottom:14px;}
+.f-text{font-size:.87rem;line-height:1.75;max-width:270px;}
+.f-h{color:rgba(255,255,255,.85);font-size:.76rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:18px;}
+.f-ul{list-style:none;padding:0;}
+.f-ul li{margin-bottom:9px;}
+.f-ul a{color:rgba(255,255,255,.4);font-size:.87rem;text-decoration:none;transition:color .2s;}
+.f-ul a:hover{color:var(--coral);}
+.soc{display:flex;gap:12px;margin-top:22px;}
+.si{width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.4);font-size:.9rem;text-decoration:none;transition:all .25s;}
+.si:hover{background:var(--g1);border-color:transparent;color:#fff;transform:translateY(-3px);}
+.f-bot{border-top:1px solid rgba(255,255,255,.07);padding-top:24px;margin-top:52px;text-align:center;font-size:.8rem;}
+.f-bot span{color:var(--coral);}
+#stt{position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:50%;background:var(--g1);color:#fff;border:none;display:none;align-items:center;justify-content:center;font-size:1rem;cursor:pointer;z-index:999;box-shadow:0 6px 24px rgba(255,107,107,.5);transition:transform .2s;}
+#stt.show{display:flex;}
+#stt:hover{transform:translateY(-3px);}
 
-/* RESPONSIVE */
-@media(max-width:1199px){:root{--img-w:400px;--img-h:400px}}
-@media(max-width:991px){
-  :root{--img-w:320px;--img-h:320px}
-  .hero-slide{min-height:auto;padding:60px 0 90px}
-  .hero-left{padding-right:0;text-align:center}
-  .hero-title{font-size:clamp(2.2rem,7vw,3rem)}
-  .hero-desc{max-width:100%;margin:0 auto 30px}
-  .hero-btns{justify-content:center}
-  .hero-badges{justify-content:center}
-  .hero-right{margin-top:40px;padding-left:0;justify-content:center}
-  .hero-img-wrap{margin:0 auto}
-  .scroll-hint{display:none}
-}
-@media(max-width:767px){
-  :root{--img-w:260px;--img-h:260px}
-  .hero-title{font-size:2rem}
-  .carousel-control-prev{left:10px}
-  .carousel-control-next{right:10px}
-  .fc-top,.fc-bottom{display:none}
-}
-@media(max-width:480px){
-  :root{--img-w:220px;--img-h:220px}
-  .hero-title{font-size:1.75rem}
-  .hero-btns{flex-direction:column;align-items:center}
-  .btn-main,.btn-ghost{width:100%;justify-content:center}
-}
+/* ── RESPONSIVE ── */
+@media(max-width:991px){.hero-content h1{font-size:3rem;}.c-box{padding:36px 28px;}}
+@media(max-width:767px){.hero-slide{height:82vh;}.hero-content{padding:0 24px;}.hero-content h1{font-size:2.4rem;}}
+@media(max-width:480px){.hero-content h1{font-size:2rem;}.hero-btns{flex-direction:column;}.btn-ph,.btn-oh{text-align:center;}}
 </style>
 </head>
 <body>
 
 <!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg" id="mainNav">
+<nav class="navbar navbar-expand-lg" id="nav">
   <div class="container">
-    <a class="navbar-brand" href="#">JPM <em style="font-style:italic;">Footwear</em></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+    <a class="navbar-brand" href="#home">JPM <em style="font-style:italic;">Footwear</em></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nm">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+    <div class="collapse navbar-collapse justify-content-end" id="nm">
       <ul class="navbar-nav align-items-center gap-1">
-        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Brands</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Products</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        <li><a class="nav-link" href="#home">Home</a></li>
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#brands">Brands</a></li>
+        <li><a class="nav-link" href="#products">Products</a></li>
+        <li><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- CAROUSEL — NO data-bs-ride / data-bs-interval on the element; all via JS -->
+<!-- HERO CAROUSEL -->
 <section id="home">
-<div id="heroCarousel" class="carousel slide">
-
+<div id="hc" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+  <div class="carousel-indicators">
+    <button data-bs-target="#hc" data-bs-slide-to="0" class="active"></button>
+    <button data-bs-target="#hc" data-bs-slide-to="1"></button>
+    <button data-bs-target="#hc" data-bs-slide-to="2"></button>
+  </div>
   <div class="carousel-inner">
 
-    <!-- SLIDE 1 -->
     <div class="carousel-item active">
-      <div class="hero-slide" style="background:linear-gradient(135deg,#0B1D3A 0%,#102a55 50%,#0d2040 100%);">
-        <div class="slide-split" style="background:#FF6B6B;"></div>
-        <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,#FF6B6B,transparent);top:-120px;right:5%;"></div>
-        <div class="orb orb-2" style="width:300px;height:300px;background:radial-gradient(circle,#FFD166,transparent);bottom:5%;right:35%;"></div>
-        <div class="orb orb-3" style="width:200px;height:200px;background:radial-gradient(circle,#FF8E53,transparent);top:30%;left:5%;"></div>
+      <div class="hero-slide">
+        <div class="hero-bg" style="background:linear-gradient(140deg,#0B1D3A,#162f5e,#0d2845);"></div>
+        <div class="orb" style="width:420px;height:420px;background:radial-gradient(circle,rgba(255,107,107,.15),transparent);top:-80px;right:10%;animation-duration:9s;"></div>
+        <div class="orb" style="width:260px;height:260px;background:radial-gradient(circle,rgba(255,209,102,.12),transparent);bottom:8%;right:22%;animation-delay:3.5s;"></div>
+        <div class="hero-overlay" style="background:linear-gradient(110deg,rgba(11,29,58,.93) 38%,rgba(11,29,58,.3));"></div>
         <div class="container">
-          <div class="row align-items-center gy-4">
-            <div class="col-lg-6">
-              <div class="hero-left">
-                <div class="hero-eyebrow" style="color:var(--gold);">
-                  <span class="line" style="background:var(--gold);"></span>New Collection 2024<span class="line" style="background:var(--gold);"></span>
-                </div>
-                <h1 class="hero-title">Step Into<br/><em style="color:var(--gold);">Premium</em><br/>Style &amp; Comfort</h1>
-                <p class="hero-desc">Discover the finest footwear from world-class brands like Puma, Adidas, Woodland &amp; Skechers. Every pair crafted for the perfect blend of style and comfort.</p>
-                <div class="hero-btns">
-                  <a href="#" class="btn-main" style="background:linear-gradient(135deg,#FF6B6B,#FF8E53);box-shadow:0 8px 28px rgba(255,107,107,.5);"><i class="fas fa-shoe-prints"></i> Shop Now</a>
-                  <a href="#" class="btn-ghost"><i class="fas fa-play-circle"></i> View Collection</a>
-                </div>
-                <div class="hero-badges">
-                  <div class="hbadge"><i class="fas fa-star" style="color:var(--gold);"></i> Premium Brands</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-tag" style="color:#1CB5A0;"></i> Best Prices</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-truck" style="color:#FF8E53;"></i> Free Delivery</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="hero-right">
-                <div class="hero-img-wrap">
-                  <div class="img-glow" style="background:radial-gradient(circle,#FF6B6B,#FF8E53);"></div>
-                  <img class="hero-product-img" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700&q=90&auto=format&fit=crop" alt="Premium Sneakers" loading="eager"/>
-                  <div class="float-card fc-top"><span class="fc-icon" style="background:rgba(255,107,107,.3);">👟</span>Sports &amp; Casual Shoes</div>
-                  <div class="float-card fc-bottom"><span class="fc-icon" style="background:rgba(255,209,102,.3);">⭐</span>15+ Top Brands Available</div>
-                </div>
-              </div>
+          <div class="hero-content">
+            <div class="hero-eyebrow"><span></span>New Collection 2024</div>
+            <h1>Step Into <em>Premium</em><br/>Style & Comfort</h1>
+            <p>Discover the finest footwear from world-class brands. Every pair crafted for the perfect blend of style and comfort.</p>
+            <div class="hero-btns">
+              <a href="#products" class="btn-ph"><i class="fas fa-shoe-prints me-2"></i>Explore Products</a>
+              <a href="#brands" class="btn-oh">Our Brands</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 2 -->
     <div class="carousel-item">
-      <div class="hero-slide" style="background:linear-gradient(135deg,#1a0510 0%,#3a0d26 50%,#5c1640 100%);">
-        <div class="slide-split" style="background:#FF8E53;"></div>
-        <div class="orb" style="width:480px;height:480px;background:radial-gradient(circle,#FF8E53,transparent);top:-100px;left:5%;"></div>
-        <div class="orb orb-2" style="width:280px;height:280px;background:radial-gradient(circle,#6C63FF,transparent);bottom:10%;left:30%;"></div>
-        <div class="orb orb-3" style="width:220px;height:220px;background:radial-gradient(circle,#FFD166,transparent);top:20%;right:8%;"></div>
+      <div class="hero-slide">
+        <div class="hero-bg" style="background:linear-gradient(140deg,#1a0510,#3d0f2a,#6b1a42);"></div>
+        <div class="orb" style="width:460px;height:460px;background:radial-gradient(circle,rgba(255,142,83,.15),transparent);top:-100px;left:12%;animation-duration:11s;"></div>
+        <div class="orb" style="width:210px;height:210px;background:radial-gradient(circle,rgba(108,99,255,.15),transparent);bottom:12%;left:28%;animation-delay:2s;"></div>
+        <div class="hero-overlay" style="background:linear-gradient(110deg,rgba(30,10,20,.9) 38%,rgba(30,10,20,.3));"></div>
         <div class="container">
-          <div class="row align-items-center gy-4">
-            <div class="col-lg-6">
-              <div class="hero-left">
-                <div class="hero-eyebrow" style="color:#FF8E53;">
-                  <span class="line" style="background:#FF8E53;"></span>Trending Styles<span class="line" style="background:#FF8E53;"></span>
-                </div>
-                <h1 class="hero-title">Bags for<br/><em style="color:#FF8E53;">Every</em><br/>Journey</h1>
-                <p class="hero-desc">From premium backpacks to hard-shell trolleys — explore our curated bag collection from VIP, Skybags, Safari &amp; American Tourister.</p>
-                <div class="hero-btns">
-                  <a href="#" class="btn-main" style="background:linear-gradient(135deg,#FF8E53,#FFD166);box-shadow:0 8px 28px rgba(255,142,83,.5);"><i class="fas fa-suitcase-rolling"></i> Shop Bags</a>
-                  <a href="#" class="btn-ghost"><i class="fas fa-images"></i> View Gallery</a>
-                </div>
-                <div class="hero-badges">
-                  <div class="hbadge"><i class="fas fa-shield-alt" style="color:#FF8E53;"></i> Durable Quality</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-palette" style="color:#6C63FF;"></i> Stylish Designs</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-boxes" style="color:var(--gold);"></i> All Sizes</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="hero-right">
-                <div class="hero-img-wrap">
-                  <div class="img-glow" style="background:radial-gradient(circle,#FF8E53,#FFD166);"></div>
-                  <img class="hero-product-img" src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700&q=90&auto=format&fit=crop" alt="Travel Backpack" loading="lazy"/>
-                  <div class="float-card fc-top"><span class="fc-icon" style="background:rgba(255,142,83,.3);">🎒</span>Backpacks &amp; Travel Bags</div>
-                  <div class="float-card fc-bottom"><span class="fc-icon" style="background:rgba(108,99,255,.3);">✈️</span>American Tourister · VIP · Safari</div>
-                </div>
-              </div>
+          <div class="hero-content">
+            <div class="hero-eyebrow" style="color:#FF8E53;"><span style="background:#FF8E53;"></span>Trending Styles</div>
+            <h1>Bags for <em style="color:#FF8E53;">Every</em><br/>Adventure</h1>
+            <p>Premium backpacks, trolleys & ladies bags from VIP, Skybags, Safari & American Tourister — built for life on the move.</p>
+            <div class="hero-btns">
+              <a href="#products" class="btn-ph" style="background:linear-gradient(135deg,#FF8E53,#FFD166);box-shadow:0 8px 30px rgba(255,142,83,.5);"><i class="fas fa-suitcase-rolling me-2"></i>Shop Bags</a>
+              <a href="#gallery" class="btn-oh">View Gallery</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 3 -->
     <div class="carousel-item">
-      <div class="hero-slide" style="background:linear-gradient(135deg,#03101a 0%,#063530 50%,#084038 100%);">
-        <div class="slide-split" style="background:#1CB5A0;"></div>
-        <div class="orb" style="width:500px;height:500px;background:radial-gradient(circle,#1CB5A0,transparent);top:-100px;right:6%;"></div>
-        <div class="orb orb-2" style="width:300px;height:300px;background:radial-gradient(circle,#FFD166,transparent);bottom:5%;right:25%;"></div>
-        <div class="orb orb-3" style="width:220px;height:220px;background:radial-gradient(circle,#6C63FF,transparent);top:25%;left:4%;"></div>
+      <div class="hero-slide">
+        <div class="hero-bg" style="background:linear-gradient(140deg,#030f1a,#063028,#094038);"></div>
+        <div class="orb" style="width:440px;height:440px;background:radial-gradient(circle,rgba(28,181,160,.15),transparent);top:-80px;right:6%;animation-duration:10s;"></div>
+        <div class="orb" style="width:290px;height:290px;background:radial-gradient(circle,rgba(255,209,102,.12),transparent);bottom:4%;right:18%;animation-delay:4s;"></div>
+        <div class="hero-overlay" style="background:linear-gradient(110deg,rgba(3,15,26,.93) 38%,rgba(3,15,26,.3));"></div>
         <div class="container">
-          <div class="row align-items-center gy-4">
-            <div class="col-lg-6">
-              <div class="hero-left">
-                <div class="hero-eyebrow" style="color:#1CB5A0;">
-                  <span class="line" style="background:#1CB5A0;"></span>Travel in Style<span class="line" style="background:#1CB5A0;"></span>
-                </div>
-                <h1 class="hero-title">Trolleys &amp;<br/><em style="color:#1CB5A0;">Luggage</em><br/>Collection</h1>
-                <p class="hero-desc">Premium hard &amp; soft shell trolley bags in all sizes — cabin to check-in. Trusted brands: American Tourister, VIP, Skybags &amp; Safari.</p>
-                <div class="hero-btns">
-                  <a href="#" class="btn-main" style="background:linear-gradient(135deg,#1CB5A0,#6C63FF);box-shadow:0 8px 28px rgba(28,181,160,.5);"><i class="fas fa-suitcase"></i> Explore Trolleys</a>
-                  <a href="#" class="btn-ghost"><i class="fas fa-tags"></i> Best Deals</a>
-                </div>
-                <div class="hero-badges">
-                  <div class="hbadge"><i class="fas fa-plane" style="color:#1CB5A0;"></i> Cabin &amp; Check-In</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-lock" style="color:var(--gold);"></i> Secure Locks</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-feather" style="color:#FF8E53;"></i> Lightweight</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="hero-right">
-                <div class="hero-img-wrap">
-                  <div class="img-glow" style="background:radial-gradient(circle,#1CB5A0,#6C63FF);"></div>
-                  <img class="hero-product-img" src="https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=700&q=90&auto=format&fit=crop" alt="Travel Trolley" loading="lazy"/>
-                  <div class="float-card fc-top"><span class="fc-icon" style="background:rgba(28,181,160,.3);">🧳</span>Travel Trolleys &amp; Suitcases</div>
-                  <div class="float-card fc-bottom"><span class="fc-icon" style="background:rgba(255,209,102,.3);">🌍</span>Built for Every Journey</div>
-                </div>
-              </div>
+          <div class="hero-content">
+            <div class="hero-eyebrow" style="color:#1CB5A0;"><span style="background:#1CB5A0;"></span>Back to School</div>
+            <h1>School <em style="color:#1CB5A0;">Essentials</em><br/>Under One Roof</h1>
+            <p>School bags, stationery, chappals and more — your one-stop shop for everything students need.</p>
+            <div class="hero-btns">
+              <a href="#products" class="btn-ph" style="background:linear-gradient(135deg,#1CB5A0,#6C63FF);box-shadow:0 8px 30px rgba(28,181,160,.5);"><i class="fas fa-graduation-cap me-2"></i>Shop Now</a>
+              <a href="#about" class="btn-oh">Our Story</a>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- SLIDE 4 -->
-    <div class="carousel-item">
-      <div class="hero-slide" style="background:linear-gradient(135deg,#1a0520 0%,#30084a 50%,#200a38 100%);">
-        <div class="slide-split" style="background:#6C63FF;"></div>
-        <div class="orb" style="width:480px;height:480px;background:radial-gradient(circle,#6C63FF,transparent);top:-80px;right:8%;"></div>
-        <div class="orb orb-2" style="width:260px;height:260px;background:radial-gradient(circle,#FF6B6B,transparent);bottom:8%;left:20%;"></div>
-        <div class="orb orb-3" style="width:200px;height:200px;background:radial-gradient(circle,#FFD166,transparent);top:15%;left:5%;"></div>
-        <div class="container">
-          <div class="row align-items-center gy-4">
-            <div class="col-lg-6">
-              <div class="hero-left">
-                <div class="hero-eyebrow" style="color:#c4aaff;">
-                  <span class="line" style="background:#c4aaff;"></span>Exclusively for Her<span class="line" style="background:#c4aaff;"></span>
-                </div>
-                <h1 class="hero-title">Ladies<br/><em style="color:#c4aaff;">Handbag</em><br/>Collection</h1>
-                <p class="hero-desc">Chic totes, elegant clutches, satchels and party purses — premium handbags designed to complement every style and every occasion.</p>
-                <div class="hero-btns">
-                  <a href="#" class="btn-main" style="background:linear-gradient(135deg,#6C63FF,#FF6B6B);box-shadow:0 8px 28px rgba(108,99,255,.5);"><i class="fas fa-shopping-bag"></i> Shop Handbags</a>
-                  <a href="#" class="btn-ghost"><i class="fas fa-heart"></i> Wishlist</a>
-                </div>
-                <div class="hero-badges">
-                  <div class="hbadge"><i class="fas fa-gem" style="color:#c4aaff;"></i> Premium Quality</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-paint-brush" style="color:#FF6B6B;"></i> Trendy Designs</div>
-                  <div class="hbadge-sep"></div>
-                  <div class="hbadge"><i class="fas fa-gift" style="color:var(--gold);"></i> Gift Worthy</div>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <div class="hero-right">
-                <div class="hero-img-wrap">
-                  <div class="img-glow" style="background:radial-gradient(circle,#6C63FF,#FF6B6B);"></div>
-                  <img class="hero-product-img" src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&q=90&auto=format&fit=crop" alt="Ladies Handbag" loading="lazy"/>
-                  <div class="float-card fc-top"><span class="fc-icon" style="background:rgba(108,99,255,.3);">👜</span>Totes · Clutches · Satchels</div>
-                  <div class="float-card fc-bottom"><span class="fc-icon" style="background:rgba(255,107,107,.3);">💖</span>Perfect for Every Occasion</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /.carousel-inner -->
-
-  <!-- Controls — use data-bs-target only, no ride attributes here -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span>
-  </button>
-
-  <div class="hero-progress" id="heroDots">
-    <div class="hp-dot active" data-idx="0"></div>
-    <div class="hp-dot" data-idx="1"></div>
-    <div class="hp-dot" data-idx="2"></div>
-    <div class="hp-dot" data-idx="3"></div>
   </div>
-
-  <div class="scroll-hint">
-    <div class="scroll-line"></div><span>Scroll</span>
-  </div>
-
+  <button class="carousel-control-prev" type="button" data-bs-target="#hc" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+  <button class="carousel-control-next" type="button" data-bs-target="#hc" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
 </div>
 </section>
 
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5 reveal">
+        <div class="about-wrap">
+          <div class="about-main-box">
+            <i class="fas fa-shoe-prints about-icon-bg"></i>
+          </div>
+          <div class="about-badge">
+            <big>10+</big>
+            Years<br/><small>of Trust</small>
+          </div>
+          <div class="about-float">
+            <i class="fas fa-award" style="font-size:3.5rem;color:#1CB5A0;opacity:.75;"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 ps-lg-5 reveal d2">
+        <div class="about-content">
+          <div class="eyebrow"><span></span>Our Story</div>
+          <h2>Your Trusted Destination for <span style="background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Footwear & More</span></h2>
+          <p style="margin-top:16px;">JPM Footwear has been a cornerstone of quality retail, offering a handpicked range of branded footwear, bags, and school essentials. We believe that great shoes transform not just your look — but your confidence.</p>
+          <p>From premium sneakers and formal shoes to comfy chappals, stylish handbags, travel trolleys, and school stationery — we bring the world's most trusted brands under one roof.</p>
+          <div class="atags">
+            <span class="atag">Premium Quality</span>
+            <span class="atag">Trusted Brands</span>
+            <span class="atag">Best Prices</span>
+            <span class="atag">Wide Selection</span>
+            <span class="atag">Customer First</span>
+          </div>
+          <div class="stats">
+            <div><span class="stat-n">15+</span><p class="stat-l">Top Brands</p></div>
+            <div><span class="stat-n">5K+</span><p class="stat-l">Happy Customers</p></div>
+            <div><span class="stat-n">6</span><p class="stat-l">Categories</p></div>
+            <div><span class="stat-n">10+</span><p class="stat-l">Yrs Experience</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS — Transparent Infinite Marquee -->
+<section id="brands">
+  <div class="container">
+    <div class="brands-hdr reveal">
+      <div class="eyebrow" style="justify-content:center;color:var(--gold);"><span style="background:var(--gold);"></span>Our Partners<span style="background:var(--gold);"></span></div>
+      <h2 class="sec-title" style="color:#fff;">Premium <span style="background:var(--g3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Brand</span> Collection</h2>
+    </div>
+  </div>
+  <!-- Row 1 -->
+  <div class="brand-wrap mb-2">
+    <div class="brand-track">
+      <div class="bpill b1">Woodland</div><div class="bpill b2">Lee Cooper</div><div class="bpill b3">Buckaroo</div><div class="bpill b4">Skechers</div><div class="bpill b1">Sparx</div><div class="bpill b2">Walkaroo</div><div class="bpill b3">Bata</div><div class="bpill b4">Inblu</div>
+      <div class="bpill b1">Woodland</div><div class="bpill b2">Lee Cooper</div><div class="bpill b3">Buckaroo</div><div class="bpill b4">Skechers</div><div class="bpill b1">Sparx</div><div class="bpill b2">Walkaroo</div><div class="bpill b3">Bata</div><div class="bpill b4">Inblu</div>
+    </div>
+  </div>
+  <!-- Row 2 reverse -->
+  <div class="brand-wrap">
+    <div class="brand-track rev">
+      <div class="bpill b3">Puma</div><div class="bpill b1">Adidas</div><div class="bpill b2">Reebok</div><div class="bpill b4">American Tourister</div><div class="bpill b3">Skybags</div><div class="bpill b1">VIP</div><div class="bpill b2">Safari</div>
+      <div class="bpill b3">Puma</div><div class="bpill b1">Adidas</div><div class="bpill b2">Reebok</div><div class="bpill b4">American Tourister</div><div class="bpill b3">Skybags</div><div class="bpill b1">VIP</div><div class="bpill b2">Safari</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom:56px;">
+      <div class="eyebrow" style="justify-content:center;"><span></span>What We Carry<span></span></div>
+      <h2 class="sec-title">Our <span class="hl">Product</span> Categories</h2>
+      <p class="sec-sub mx-auto mt-3">Explore our wide range of quality products sourced from the world's most trusted brands.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-4 reveal d1">
+        <div class="pc t-coral">
+          <div class="pc-ico"><span class="ei">👟</span></div>
+          <div class="pc-body">
+            <span class="pc-badge">Footwear</span>
+            <h4>Sports & Casual Footwear</h4>
+            <p>High-performance sneakers, sports shoes & casual styles from Puma, Adidas, Reebok & Skechers.</p>
+            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal d2">
+        <div class="pc t-orange">
+          <div class="pc-ico"><span class="ei">🥿</span></div>
+          <div class="pc-body">
+            <span class="pc-badge">Chappals & Shoes</span>
+            <h4>Chappals & Formal Shoes</h4>
+            <p>Comfortable chappals, slippers & elegant formal shoes from Walkaroo, Bata, Woodland & Buckaroo.</p>
+            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal d3">
+        <div class="pc t-teal">
+          <div class="pc-ico"><span class="ei">🎒</span></div>
+          <div class="pc-body">
+            <span class="pc-badge">Back Bags</span>
+            <h4>Backpacks & School Bags</h4>
+            <p>Stylish, durable backpacks for college, travel & school from Skybags, VIP, Safari & American Tourister.</p>
+            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal d1">
+        <div class="pc t-gold">
+          <div class="pc-ico"><span class="ei">👜</span></div>
+          <div class="pc-body">
+            <span class="pc-badge">Ladies Handbags</span>
+            <h4>Ladies Handbags</h4>
+            <p>Chic totes, clutches, satchels & party purses — premium ladies handbags for every occasion.</p>
+            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal d2">
+        <div class="pc t-purple">
+          <div class="pc-ico"><span class="ei">🧳</span></div>
+          <div class="pc-body">
+            <span class="pc-badge">Trolley</span>
+            <h4>Travel Trolleys & Luggage</h4>
+            <p>Lightweight hard & soft shell trolley bags from VIP, Safari & American Tourister in all sizes.</p>
+            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal d3">
+        <div class="pc t-blue">
+          <div class="pc-ico"><span class="ei">✏️</span></div>
+          <div class="pc-body">
+            <span class="pc-badge">School Stationery</span>
+            <h4>School Stationery</h4>
+            <p>Pens, pencils, notebooks, art supplies and every essential for students of all grade levels.</p>
+            <a href="#gallery" class="pc-link">Explore <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="text-center reveal" style="margin-bottom:20px;">
+      <div class="eyebrow" style="justify-content:center;"><span></span>Visual Showcase<span></span></div>
+      <h2 class="sec-title">Product <span class="hl">Gallery</span></h2>
+      <p class="sec-sub mx-auto mt-3">Browse our curated collection. Click any image to view full size.</p>
+    </div>
+    <div class="fbar reveal">
+      <button class="fbtn active" data-f="all">All</button>
+      <button class="fbtn" data-f="footwear">Footwear</button>
+      <button class="fbtn" data-f="chappals">Chappals</button>
+      <button class="fbtn" data-f="backbag">Back Bags</button>
+      <button class="fbtn" data-f="handbag">Handbags</button>
+      <button class="fbtn" data-f="trolley">Trolley</button>
+      <button class="fbtn" data-f="stationary">Stationery</button>
+    </div>
+    <div class="gal-grid" id="gg">
+      <!-- FOOTWEAR -->
+      <div class="gi" data-cat="footwear"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80" alt="Sneakers" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="footwear"><img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=600&q=80" alt="Sports Shoes" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="footwear"><img src="https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80" alt="Running Shoes" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="footwear"><img src="https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=600&q=80" alt="Casual Shoes" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="footwear"><img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&q=80" alt="Formal Shoes" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <!-- CHAPPALS -->
+      <div class="gi" data-cat="chappals"><img src="https://images.unsplash.com/photo-1523779105320-d1cd346ff52b?w=600&q=80" alt="Sandals" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="chappals"><img src="https://images.unsplash.com/photo-1554050857-c84a8abdb5e2?w=600&q=80" alt="Slippers" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="chappals"><img src="https://images.unsplash.com/photo-1515191107209-c28698631303?w=600&q=80" alt="Chappals" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <!-- BACK BAGS -->
+      <div class="gi" data-cat="backbag"><img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80" alt="Backpack" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="backbag"><img src="https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=600&q=80" alt="School Bag" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="backbag"><img src="https://images.unsplash.com/photo-1581605405669-fcdf81165afa?w=600&q=80" alt="Laptop Bag" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="backbag"><img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=600&q=80" alt="Travel Backpack" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <!-- HANDBAGS -->
+      <div class="gi" data-cat="handbag"><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&q=80" alt="Handbag" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="handbag"><img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80" alt="Ladies Bag" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="handbag"><img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=600&q=80" alt="Clutch" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <!-- TROLLEY -->
+      <div class="gi" data-cat="trolley"><img src="https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=600&q=80" alt="Trolley" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="trolley"><img src="https://images.unsplash.com/photo-1553531384-cc64ac80f931?w=600&q=80" alt="Luggage" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="trolley"><img src="https://images.unsplash.com/photo-1566232392379-afd9298e6a46?w=600&q=80" alt="Suitcase" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <!-- STATIONERY -->
+      <div class="gi" data-cat="stationary"><img src="https://images.unsplash.com/photo-1583485088034-697b5bc54ccd?w=600&q=80" alt="Stationery" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="stationary"><img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&q=80" alt="Notebooks" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+      <div class="gi" data-cat="stationary"><img src="https://images.unsplash.com/photo-1456735190827-d1262f71b8a3?w=600&q=80" alt="Art Supplies" loading="lazy"/><div class="gi-zoom"><i class="fas fa-search-plus"></i></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lb" id="lb">
+  <button class="lb-x" id="lbx"><i class="fas fa-times"></i></button>
+  <img id="lbi" src="" alt="Product"/>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container c-wrap">
+    <div class="row g-5">
+      <div class="col-lg-5 reveal">
+        <div class="eyebrow" style="color:var(--gold);"><span style="background:var(--gold);"></span>Get In Touch</div>
+        <h2 class="c-title">Visit <span>Our Store</span><br/>Today</h2>
+        <p class="c-sub">We'd love to hear from you. Reach out for product queries, brand availability, and more.</p>
+        <div class="cinfo-row">
+          <div class="cinfo">
+            <div class="cinfo-ico" style="background:var(--g1);"><i class="fas fa-map-marker-alt"></i></div>
+            <div><h6>Location</h6><p>JPM Footwear, Main Road<br/>Your City – 000001</p></div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-ico" style="background:var(--g2);"><i class="fas fa-phone-alt"></i></div>
+            <div><h6>Phone</h6><p>+91 98765 43210<br/>+91 87654 32109</p></div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-ico" style="background:var(--g3);"><i class="fas fa-envelope"></i></div>
+            <div><h6>Email</h6><p>info@jpmfootwear.com</p></div>
+          </div>
+          <div class="cinfo">
+            <div class="cinfo-ico" style="background:linear-gradient(135deg,#6C63FF,#FF6B6B);"><i class="fas fa-clock"></i></div>
+            <div><h6>Store Hours</h6><p>Mon–Sat: 9:30 AM – 9:00 PM<br/>Sunday: 10:00 AM – 7:00 PM</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7 reveal d2">
+        <div class="c-box">
+          <h4 style="color:#fff;font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:28px;">Send Us a Message</h4>
+          <div class="cf">
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <label>Your Name</label>
+                <input type="text" class="fc" placeholder="John Doe"/>
+              </div>
+              <div class="col-sm-6">
+                <label>Phone Number</label>
+                <input type="tel" class="fc" placeholder="+91 98765 43210"/>
+              </div>
+              <div class="col-12">
+                <label>Email Address</label>
+                <input type="email" class="fc" placeholder="you@email.com"/>
+              </div>
+              <div class="col-12">
+                <label>Interested In</label>
+                <select class="fc">
+                  <option value="">Select product category</option>
+                  <option>Footwear</option><option>Chappals & Shoes</option>
+                  <option>Back Bags</option><option>Ladies Handbags</option>
+                  <option>Trolley / Luggage</option><option>School Stationery</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label>Your Message</label>
+                <textarea class="fc" placeholder="Tell us what you're looking for..."></textarea>
+              </div>
+              <div class="col-12">
+                <button class="btn-send" onclick="sendMsg(event)"><i class="fas fa-paper-plane me-2"></i>Send Message</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <div class="f-brand">JPM Footwear</div>
+        <p class="f-text">Your one-stop destination for premium branded footwear, bags, and school essentials. Quality and trust at every step.</p>
+        <div class="soc">
+          <a href="#" class="si"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="si"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="si"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" class="si"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-sm-4">
+        <p class="f-h">Products</p>
+        <ul class="f-ul">
+          <li><a href="#products">Footwear</a></li>
+          <li><a href="#products">Chappals</a></li>
+          <li><a href="#products">Back Bags</a></li>
+          <li><a href="#products">Handbags</a></li>
+          <li><a href="#products">Trolleys</a></li>
+          <li><a href="#products">Stationery</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-2 col-sm-4">
+        <p class="f-h">Brands</p>
+        <ul class="f-ul">
+          <li><a href="#brands">Woodland</a></li>
+          <li><a href="#brands">Puma</a></li>
+          <li><a href="#brands">Adidas</a></li>
+          <li><a href="#brands">Skechers</a></li>
+          <li><a href="#brands">Bata</a></li>
+          <li><a href="#brands">VIP</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4 col-sm-4">
+        <p class="f-h">Quick Links</p>
+        <ul class="f-ul">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#brands">Our Brands</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div style="margin-top:22px;">
+          <p class="f-h">Store Hours</p>
+          <p style="font-size:.83rem;line-height:1.85;">Mon–Sat: 9:30 AM – 9:00 PM<br/>Sunday: 10:00 AM – 7:00 PM</p>
+        </div>
+      </div>
+    </div>
+    <div class="f-bot">
+      <p>&copy; 2024 <span>JPM Footwear</span>. All rights reserved. Crafted with <i class="fas fa-heart" style="color:var(--coral);"></i> for quality retail.</p>
+    </div>
+  </div>
+</footer>
+
+<button id="stt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up"></i></button>
+
+<!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 <script>
-(function(){
-  'use strict';
+// Smooth scroll
+$(document).on('click','a[href^="#"]',function(e){
+  const t=$(this.getAttribute('href'));
+  if(t.length){e.preventDefault();$('html,body').animate({scrollTop:t.offset().top-68},620);}
+});
 
-  /* Navbar scroll */
-  const nav = document.getElementById('mainNav');
-  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50), {passive:true});
+// Navbar + scroll top
+$(window).on('scroll',function(){
+  const s=$(this).scrollTop();
+  s>60?$('#nav').addClass('scrolled'):$('#nav').removeClass('scrolled');
+  s>400?$('#stt').addClass('show'):$('#stt').removeClass('show');
+});
 
-  /* Wait for DOM + Bootstrap to be fully ready */
-  window.addEventListener('load', function() {
+// Reveal on scroll
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('show');});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
 
-    const el    = document.getElementById('heroCarousel');
-    const items = Array.from(el.querySelectorAll('.carousel-item'));
-    const dots  = Array.from(el.querySelectorAll('.hp-dot'));
-
-    /* ── Init Bootstrap Carousel via JS ONLY ──
-       No data-bs-ride on the element prevents double-init conflicts.
-       ride:'carousel' here tells Bootstrap to auto-play immediately.    */
-    const bsCarousel = new bootstrap.Carousel(el, {
-      interval : 5000,   /* 5 sec per slide */
-      ride     : 'carousel', /* start auto-play right away */
-      wrap     : true,
-      touch    : true,
-      keyboard : true,
-      pause    : 'hover'
+// Filterable gallery
+$('.fbtn').on('click',function(){
+  $('.fbtn').removeClass('active');$(this).addClass('active');
+  const f=$(this).data('f');
+  if(f==='all'){
+    $('.gi').removeClass('hidden').hide().fadeIn(340);
+  } else {
+    $('.gi').each(function(){
+      $(this).data('cat')===f?$(this).removeClass('hidden').hide().fadeIn(340):$(this).addClass('hidden').hide();
     });
+  }
+});
 
-    /* Force-start the auto cycle (belt-and-suspenders) */
-    bsCarousel.cycle();
+// Lightbox
+$('.gi').on('click',function(){
+  $('#lbi').attr('src',$(this).find('img').attr('src'));
+  $('#lb').addClass('open');
+});
+$('#lbx,#lb').on('click',function(e){
+  if(e.target.id==='lb'||$(e.target).closest('#lbx').length){
+    $('#lb').removeClass('open');
+    setTimeout(()=>$('#lbi').attr('src',''),300);
+  }
+});
+$(document).on('keydown',e=>{if(e.key==='Escape')$('#lb').removeClass('open');});
 
-    /* Dot clicks */
-    dots.forEach(d => {
-      d.addEventListener('click', () => bsCarousel.to(+d.dataset.idx));
-    });
-
-    /* Active dot */
-    function setDot(i){
-      dots.forEach(d => d.classList.remove('active'));
-      if(dots[i]) dots[i].classList.add('active');
-    }
-
-    /* Animate a slide */
-    function runAnim(item){
-      const hs = item.querySelector('.hero-slide');
-      hs.classList.remove('do-animate');
-      void hs.offsetHeight; /* reflow so CSS resets */
-      hs.classList.add('do-animate');
-    }
-
-    /* Stop animations (reset elements to opacity:0) */
-    function stopAnim(item){
-      item.querySelector('.hero-slide').classList.remove('do-animate');
-    }
-
-    /* slide event: fires BEFORE transition — update dot, clear outgoing */
-    el.addEventListener('slide.bs.carousel', function(e){
-      setDot(e.to);
-      stopAnim(items[e.from]);
-    });
-
-    /* slid event: fires AFTER transition — animate incoming */
-    el.addEventListener('slid.bs.carousel', function(e){
-      runAnim(items[e.to]);
-    });
-
-    /* Animate first slide on load */
-    setTimeout(function(){ runAnim(items[0]); }, 150);
-
-  });
-
-})();
+// Contact submit
+function sendMsg(e){
+  e.preventDefault();
+  const b=e.target;
+  b.innerHTML='<i class="fas fa-check me-2"></i>Message Sent Successfully!';
+  b.style.cssText='background:linear-gradient(135deg,#1CB5A0,#52b788);box-shadow:0 10px 40px rgba(28,181,160,.5);';
+  setTimeout(()=>{b.innerHTML='<i class="fas fa-paper-plane me-2"></i>Send Message';b.style.cssText='';},3500);
+}
 </script>
 </body>
 </html>
