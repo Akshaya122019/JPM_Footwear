@@ -16,10 +16,12 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg" id="mainNav">
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand" href="#">JPM <em style="font-style:italic;">Footwear</em></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <a class="navbar-brand" href="#">
+                <img src="images/footwear.png" class="img-fluid" width="200">
+            </a>
+            <button class="navbar-toggler bg-black" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navMenu">
@@ -891,7 +893,7 @@
             <div class="container">
                 <div class="row g-0 justify-content-center">
                     <div class="col-sm-6 col-lg-4">
-                        <div class="qs-item">
+                        <div class="qs-item py-3">
                             <div class="qs-ico" style="background:var(--g1);">
                                 <i class="fas fa-phone"></i>
                             </div>
@@ -903,7 +905,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <div class="qs-item">
+                        <div class="qs-item py-3">
                             <div class="qs-ico" style="background:var(--g3);">
                                 <i class="fas fa-envelope"></i>
                             </div>
@@ -914,7 +916,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <div class="qs-item">
+                        <div class="qs-item py-3">
                             <div class="qs-ico" style="background:linear-gradient(135deg,#6C63FF,#FF6B6B);">
                                 <i class="fas fa-clock"></i>
                             </div>
@@ -1017,6 +1019,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+     <script>
+        const navbar = document.querySelector('.navbar.fixed-top');
+        document.body.style.paddingTop = navbar.offsetHeight + 'px';
+    </script>
 </body>
 
 </html>

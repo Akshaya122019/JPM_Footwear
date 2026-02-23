@@ -73,9 +73,8 @@ body {
    NAVBAR
 ═══════════════════════════════ */
 .navbar {
-    background: rgba(11, 29, 58, .97);
+    background: #ffd4d4;
     backdrop-filter: blur(18px);
-    padding: 14px 0;
     position: fixed;
     width: 100%;
     top: 0;
@@ -103,7 +102,7 @@ body {
 }
 
 .nav-link {
-    color: rgba(255, 255, 255, .75) !important;
+    color: black !important;
     font-size: .88rem;
     font-weight: 500;
     letter-spacing: .5px;
@@ -129,7 +128,6 @@ body {
    HERO CAROUSEL WRAPPER
 ═══════════════════════════════ */
 #heroCarousel {
-    margin-top: 68px;
     position: relative;
     overflow: hidden;
     width: 100%
